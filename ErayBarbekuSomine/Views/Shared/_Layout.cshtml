@@ -84,7 +84,7 @@
 										<div class="header-nav-main header-nav-main-mobile-dark header-nav-main-square header-nav-main-dropdown-no-borders header-nav-main-effect-2 header-nav-main-sub-effect-1">
 											<nav class="collapse">
 												<ul class="nav nav-pills flex-column flex-lg-row" id="mainNav">
-													<li><a data-hash="" data-hash-offset="0" data-hash-offset-lg="70" href="#home" class="nav-link current-page-active active">Anasayfa</a></li>
+													<li><a data-hash="" data-hash-offset="0" data-hash-offset-lg="70" href="~/Home/Index" class="nav-link current-page-active active">Anasayfa</a></li>
 													@*<li><a data-hash="" data-hash-offset="0" data-hash-offset-lg="70" href="#tour" class="nav-link">TOUR</a></li>*@
 													<li><a data-hash="" data-hash-offset="0" data-hash-offset-lg="70" href="#about" class="nav-link">Hakkımızda</a></li>
 													<li><a data-hash="" data-hash-offset="0" data-hash-offset-lg="70" href="#news" class="nav-link">Ürünler</a></li>
@@ -132,16 +132,16 @@
 					<div class="row justify-content-center justify-content-md-between align-items-center py-5">
 						<div class="col-auto mb-4 mb-md-0">
 							<a href="demo-band.html">
-								<img src="img/demos/band/logo.png" class="img-fluid" alt="" width="112" height="30" />
+								<img src="~/images/logo2.png" class="img-fluid" alt="" width="112" height="30" />
 							</a>
 						</div>
 						<div class="col-auto">
 							<ul class="list list-inline list-unstyled text-center text-md-start mb-0">
-								<li class="list-inline-item px-2 mx-3 mb-3 mb-sm-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="#home" class="text-color-light font-weight-bold">HOME</a></li>
-								<li class="list-inline-item px-2 mx-3 mb-3 mb-sm-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="#tour" class="text-color-light font-weight-bold">TOUR</a></li>
-								<li class="list-inline-item px-2 mx-3 mb-3 mb-sm-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="#about" class="text-color-light font-weight-bold">ABOUT</a></li>
-								<li class="list-inline-item px-2 mx-3 mb-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="#news" class="text-color-light font-weight-bold">NEWS</a></li>
-								<li class="list-inline-item ps-2 ms-3 mb-0"><a href="#hiddenContactForm" data-bs-toggle="collapse" aria-controls="hiddenContactForm" data-scroll-and-focus class="text-color-light font-weight-bold">CONTACT</a></li>
+								<li class="list-inline-item px-2 mx-3 mb-3 mb-sm-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="#home" class="text-color-light font-weight-bold">Anasayfa</a></li>
+								<li class="list-inline-item px-2 mx-3 mb-3 mb-sm-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="#tour" class="text-color-light font-weight-bold">Hakkımızda</a></li>
+							
+								<li class="list-inline-item px-2 mx-3 mb-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="#news" class="text-color-light font-weight-bold">Ürünler</a></li>
+								<li class="list-inline-item ps-2 ms-3 mb-0"><a href="#hiddenContactForm" data-bs-toggle="collapse" aria-controls="hiddenContactForm" data-scroll-and-focus class="text-color-light font-weight-bold">İletişim</a></li>
 							</ul>
 						</div>
 					</div>
@@ -204,6 +204,8 @@
 						</div>
 					</div>
 				</div>
+		
+
 				<div class="footer-copyright bg-tertiary py-5">
 					<div class="container-fluid py-4 px-5">
 						<div class="row justify-content-between">
@@ -220,7 +222,31 @@
 						</div>
 					</div>
 				</div>
+		<a href="https://api.whatsapp.com/send?phone=905527422280&text=Merhaba" class="float" target="_blank">
+			<i class="fa-brands fa-whatsapp my-float"></i>
+		</a>
 			</footer>
+			<style>
+
+		.float {
+			position: fixed;
+			width: 60px;
+			height: 60px;
+			bottom: 70px;
+			right: 25px;
+			background-color: #1ABC9C;
+			color: #FFF;
+			border-radius: 50px;
+			text-align: center;
+			font-size: 30px;
+			box-shadow: 2px 2px 3px #999;
+			z-index: 100;
+		}
+
+		.my-float {
+			margin-top: 16px;
+		}
+			</style>
 		<!-- Vendor -->
 		
         <script src="~/js/plugins.min.js"></script>
