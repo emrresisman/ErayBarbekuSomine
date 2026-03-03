@@ -1,0 +1,95 @@
+@model ErayBarbekuSomine.Models.ContactMessage
+@{
+    ViewData["Title"] = "Mesaj Detayı";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div>
+        <h1>
+            <a href="/Admin/Messages" class="btn btn-sm me-2" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--admin-text-muted);border-radius:8px;">
+                <i class="fas fa-arrow-left fa-xs"></i>
+            </a>
+            Mesaj Detayı
+        </h1>
+        <p>@Model.Subject</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-envelope-open header-icon"></i> Mesaj İçeriği
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <div style="font-size:0.74rem; color:var(--admin-text-muted); text-transform:uppercase; letter-spacing:0.06em; font-weight:600; margin-bottom:4px;">Gönderen</div>
+                        <div style="color:var(--admin-text); font-weight:600;">@Model.FullName</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div style="font-size:0.74rem; color:var(--admin-text-muted); text-transform:uppercase; letter-spacing:0.06em; font-weight:600; margin-bottom:4px;">E-posta</div>
+                        <a href="mailto:@Model.Email" style="color:var(--admin-red);">@Model.Email</a>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div style="font-size:0.74rem; color:var(--admin-text-muted); text-transform:uppercase; letter-spacing:0.06em; font-weight:600; margin-bottom:4px;">Tarih</div>
+                    <div style="color:var(--admin-text-muted);">@Model.CreatedAt.ToString("dd MMMM yyyy, HH:mm")</div>
+                </div>
+                <hr style="border-color:var(--admin-border);">
+                <div>
+                    <div style="font-size:0.74rem; color:var(--admin-text-muted); text-transform:uppercase; letter-spacing:0.06em; font-weight:600; margin-bottom:10px;">Mesaj</div>
+                    <div style="background:rgba(0,0,0,0.2); border:1px solid var(--admin-border); border-radius:10px; padding:1.2rem; white-space:pre-wrap; font-size:0.92rem; color:var(--admin-text); line-height:1.7;">@Model.Message</div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+                <a href="mailto:@Model.Email" class="btn-admin-primary btn" style="font-size:0.83rem;">
+                    <i class="fas fa-reply me-1"></i> E-posta ile Yanıtla
+                </a>
+                <button type="button" onclick="deleteMessage(@Model.Id)"
+                        class="btn btn-sm" style="background:rgba(234,28,33,0.12);color:var(--admin-red);border:1px solid rgba(234,28,33,0.25);border-radius:8px;font-size:0.83rem;padding:0.4rem 0.9rem;">
+                    <i class="fas fa-trash fa-xs me-1"></i> Sil
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts {
+    <script>
+        function deleteMessage(id) {
+            Swal.fire({
+                title: 'Emin misiniz?',
+                text: "Bu mesaj kalıcı olarak silinecek!",
+                icon: 'warning',
+                background: '#161b22',
+                color: '#e6edf3',
+                iconColor: '#EA1C21',
+                showCancelButton: true,
+                confirmButtonColor: '#EA1C21',
+                cancelButtonColor: 'rgba(255,255,255,0.1)',
+                confirmButtonText: 'Evet, Sil',
+                cancelButtonText: 'İptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var fd = new FormData();
+                    fd.append("id", id);
+                    fd.append("__RequestVerificationToken", document.querySelector('input[name="__RequestVerificationToken"]').value);
+                    fetch('/Admin/DeleteMessage', { method: 'POST', body: fd })
+                    .then(r => r.json())
+                    .then(res => {
+                        if (res.success) {
+                            Swal.fire({ title: 'Silindi!', text: res.message, icon: 'success', background: '#161b22', color: '#e6edf3', confirmButtonColor: '#EA1C21' })
+                            .then(() => window.location.href = '/Admin/Messages');
+                        } else {
+                            Swal.fire({ title: 'Hata', text: res.message, icon: 'error', background: '#161b22', color: '#e6edf3', confirmButtonColor: '#EA1C21' });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

@@ -1,4 +1,6 @@
-ï»¿<div role="main" class="main">
+@model IEnumerable<ErayBarbekuSomine.Models.Image>
+
+<div role="main" class="main">
 
 
 
@@ -7,12 +9,12 @@
 		<div class="container container-xl-custom">
 			<div class="row">
 				<div class="col-md-8 order-2 order-md-1 align-self-center p-static">
-					<h1 class="font-weight-bold">U Tipi ÅÃ¶mine</h1>
+					<h1 class="font-weight-bold">U Tipi Şömine</h1>
 				</div>
 				<div class="col-md-4 order-1 order-md-2 align-self-center">
 					<ul class="breadcrumb d-block text-md-end breadcrumb-light">
 						<li><a href="demo-band.html">Home</a></li>
-						<li class="active"><a href="demo-band-blog.html">U Tipi ÅÃ¶mine</a></li>
+						<li class="active"><a href="demo-band-blog.html">U Tipi Şömine</a></li>
 					</ul>
 				</div>
 			</div>
@@ -29,7 +31,7 @@
 						<div class="col">
 							<article class="border-bottom-0 pb-0 mb-5 pt-4">
 								<p>
-									U tipi ÅŸÃ¶mineler, modern tasarÄ±m ve ÅŸÄ±k bir gÃ¶rÃ¼nÃ¼m sunan lÃ¼ks ÅŸÃ¶mine modellerinden biridir. Bu ÅŸÃ¶minelerin Ã¶zelliÄŸi, U ÅŸeklindeki tasarÄ±mdÄ±r ve genellikle duvara gÃ¶mÃ¼lÃ¼ olarak yerleÅŸtirilirler.
+									U tipi şömineler, modern tasarım ve şık bir görünüm sunan lüks şömine modellerinden biridir. Bu şöminelerin özelliği, U şeklindeki tasarımdır ve genellikle duvara gömülü olarak yerleştirilirler.
 
 
 
@@ -37,7 +39,7 @@
 
 								</p>
 								<p class="pb-4">
-									U tipi ÅŸÃ¶mineler, geleneksel ÅŸÃ¶minelerin aksine daha az yer kaplar ve modern evlerin minimalist tasarÄ±mÄ±na uyum saÄŸlarlar. U ÅŸekli, ateÅŸin Ã§evresinde oturma alanÄ± iÃ§in ideal bir dÃ¼zen saÄŸlar ve daha geniÅŸ bir gÃ¶rÃ¼ÅŸ aÃ§Ä±sÄ± sunar.
+									U tipi şömineler, geleneksel şöminelerin aksine daha az yer kaplar ve modern evlerin minimalist tasarımına uyum sağlarlar. U şekli, ateşin çevresinde oturma alanı için ideal bir düzen sağlar ve daha geniş bir görüş açısı sunar.
 
 
 
@@ -45,26 +47,10 @@
 
 								</p>
 
-								<div class="row pb-5">
-									<div class="col-sm-4">
-										<a class="img-thumbnail img-thumbnail-no-borders d-block img-thumbnail-hover-icon lightbox" href="~/images/utipi/1.jpg" data-plugin-options="{'type':'image'}">
-											<img class="img-fluid rounded-0" src="~/images/utipi/1.jpg" alt="Project Image">
-										</a>
-									</div>
-									<div class="col-sm-4">
-										<a class="img-thumbnail img-thumbnail-no-borders d-block img-thumbnail-hover-icon lightbox" href="~/images/utipi/4.jpg" data-plugin-options="{'type':'image'}">
-											<img class="img-fluid rounded-0" src="~/images/utipi/6.jpg" alt="Project Image">
-										</a>
-									</div>
-									<div class="col-sm-4">
-										<a class="img-thumbnail img-thumbnail-no-borders d-block img-thumbnail-hover-icon lightbox" href="~/images/utipi/3.jpg" data-plugin-options="{'type':'image'}">
-											<img class="img-fluid rounded-0" src="~/images/utipi/7.jpg" alt="Project Image">
-										</a>
-									</div>
-								</div>
+								<partial name="_GalleryPartial" model="Model" view-data='new ViewDataDictionary(ViewData) { { "Category", "UTipiSomine" } }' />
 
 								<p>
-									Bu ÅŸÃ¶mineler genellikle Ã§elik, cam ve beton gibi modern malzemelerden yapÄ±lmÄ±ÅŸtÄ±r. U tipi ÅŸÃ¶mineler, iÃ§ mekanda bir sanat eseri gibi gÃ¶rÃ¼nebilirler ve modern bir tasarÄ±m estetiÄŸi ile birleÅŸtirilirler.
+									Bu şömineler genellikle çelik, cam ve beton gibi modern malzemelerden yapılmıştır. U tipi şömineler, iç mekanda bir sanat eseri gibi görünebilirler ve modern bir tasarım estetiği ile birleştirilirler.
 
 
 
@@ -72,7 +58,7 @@
 
 								</p>
 								<p>
-									AyrÄ±ca, U tipi ÅŸÃ¶minelerdeki ekstra fÄ±rÄ±nlar ve Ä±zgara bÃ¶lÃ¼mleri, geleneksel bir ÅŸÃ¶minenin yanÄ± sÄ±ra ev sahiplerinin yemek piÅŸirmelerine olanak tanÄ±r. U tipi ÅŸÃ¶mineler, evinizin odak noktasÄ± haline gelerek, Ã¶zel bir atmosfer yaratmanÄ±zÄ± saÄŸlar.
+									Ayrıca, U tipi şöminelerdeki ekstra fırınlar ve ızgara bölümleri, geleneksel bir şöminenin yanı sıra ev sahiplerinin yemek pişirmelerine olanak tanır. U tipi şömineler, evinizin odak noktası haline gelerek, özel bir atmosfer yaratmanızı sağlar.
 
 
 
@@ -86,14 +72,14 @@
 
 								</p>
 								<a href="https://wa.me/+905312523798?text=Merhaba,%20urunler%20hakkinda%20bilgi%20almak%20istiyorum." class="btn btn-modern btn-primary btn-arrow-effect-1">Whatsapp <i class="fas fa-arrow-right ms-2"></i></a>
-								<a href="tel:+905312523798" class="btn btn-modern btn-danger btn-arrow-effect-1">Fiyat AlÄ±n <i class="fas fa-arrow-right ms-2"></i></a>
+								<a href="tel:+905312523798" class="btn btn-modern btn-danger btn-arrow-effect-1">Fiyat Alın <i class="fas fa-arrow-right ms-2"></i></a>
 								<br /><br />
 								<table class="table text-white">
 
 									<tbody>
 										<tr>
 											<td>
-												FiyatÄ±
+												Fiyatı
 											</td>
 											<td>
 												<b>Sorunuz</b>
@@ -102,7 +88,7 @@
 										</tr>
 										<tr>
 											<td>
-												DÃ¶kÃ¼m Kazan Durumu
+												Döküm Kazan Durumu
 											</td>
 											<td>
 												Var
@@ -111,7 +97,7 @@
 										</tr>
 										<tr>
 											<td>
-												YakÄ±t Tipi
+												Yakıt Tipi
 											</td>
 											<td>
 												Odun
@@ -120,10 +106,10 @@
 										</tr>
 										<tr>
 											<td>
-												ÅÃ¶mine YapÄ±m SÃ¼resi
+												Şömine Yapım Süresi
 											</td>
 											<td>
-												1-3 GÃ¼n
+												1-3 Gün
 											</td>
 
 										</tr>

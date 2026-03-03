@@ -1,16 +1,70 @@
 ﻿<!DOCTYPE html>
-<html lang="en" class="dark" data-style-switcher-options="{'changeLogo': false, 'colorPrimary': '#EA1C21', 'colorSecondary': '#171B1F', 'colorTertiary': '#12161A', 'colorQuaternary': '#383f48', 'backgroundColor': 'dark'}">
+<html lang="tr" class="dark" data-style-switcher-options="{'changeLogo': false, 'colorPrimary': '#EA1C21', 'colorSecondary': '#171B1F', 'colorTertiary': '#12161A', 'colorQuaternary': '#383f48', 'backgroundColor': 'dark'}">
 <head>
 
 	<!-- Basic -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Eray Barbekü Şömine</title>
+    <title>Eray Barbekü & Şömine | Dış Mekan Barbekü Üreticisi</title>
 
-	<meta name="keywords" content="Barbekü Şömine" />
-	<meta name="description" content="Eray Barbekü Şömine">
-	
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Düz Cepheli, L Tipi, Köşe Şömine, Truva Barbekü ve daha fazlası. Kaliteli malzeme, usta işçilik. Türkiye geneli üretim ve montaj hizmeti.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Eray Barbekü Şömine">
+    <link rel="canonical" href="https://www.eraybarbekusomine.com/">
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.eraybarbekusomine.com/">
+    <meta property="og:title" content="Eray Barbekü & Şömine | Dış Mekan Barbekü Üreticisi">
+    <meta property="og:description" content="Düz Cepheli, L Tipi, Köşe Şömine, Truva Barbekü modelleri. Türkiye geneli üretim ve montaj. Kalite ve estetik bir arada.">
+    <meta property="og:image" content="https://www.eraybarbekusomine.com/images/logo2.png">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:site_name" content="Eray Barbekü Şömine">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Eray Barbekü & Şömine | Dış Mekan Barbekü Üreticisi">
+    <meta name="twitter:description" content="Düz Cepheli, L Tipi, Köşe Şömine, Truva Barbekü modelleri. Türkiye geneli üretim ve montaj.">
+    <meta name="twitter:image" content="https://www.eraybarbekusomine.com/images/logo2.png">
+
+    <!-- JSON-LD Structured Data (LocalBusiness) -->
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "LocalBusiness",
+      "name": "Eray Barbekü Şömine",
+      "description": "Düz Cepheli, L Tipi, Köşe Şömine, Truva Barbekü ve daha fazlası. Kaliteli malzeme, usta işçilik, Türkiye geneli üretim ve montaj.",
+      "url": "https://www.eraybarbekusomine.com",
+      "telephone": "+90-531-252-3798",
+      "image": [
+        "https://www.eraybarbekusomine.com/images/logo2.png"
+      ],
+      "logo": "https://www.eraybarbekusomine.com/images/logo2.png",
+      "priceRange": "₺₺",
+      "currenciesAccepted": "TRY",
+      "paymentAccepted": "Cash, Credit Card",
+      "openingHoursSpecification": [
+        {
+          "@@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "address": {
+        "@@type": "PostalAddress",
+        "addressCountry": "TR",
+        "addressLocality": "Türkiye"
+      },
+      "sameAs": [
+        "https://wa.me/905312523798"
+      ]
+    }
+    </script>
+
+
 
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
@@ -84,10 +138,20 @@
 	</script>
 	</head>
 <body data-plugin-scroll-spy data-plugin-options="{'target': '#header'}">
+    <!-- 7. Scroll Progress Bar -->
+    <div id="scroll-progress-container">
+        <div id="scroll-progress-bar"></div>
+    </div>
+
+    <!-- 6. Preloader Screen -->
+    <div id="tier1-preloader">
+        <i class="fas fa-fire fire-spinner"></i>
+    </div>
+
     <header id="header" class="header-transparent header-effect-shrink header-no-border-bottom" data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyChangeLogo': true, 'stickyStartAt': 30, 'stickyHeaderContainerHeight': 70}" style="height: 100px;">
 				<div class="header-body border-0 box-shadow-none bg-dark" style="position: fixed; top: 0px;">
 					<div class="header-container container container-xl-custom" style="height: 100px; min-height: 0px;">
-						<div class="header-row">
+						<div class="header-row position-relative w-100">
 							<div class="header-column flex-row">
 								<div class="header-logo d-lg-none" style="width: 112px; height: 0px;">
 									@*<a href="demo-band.html">
@@ -110,7 +174,7 @@
 									</div>
 								</div>
 							</div>
-					<div class="header-column flex-row flex-lg-column justify-content-center justify-content-lg-center align-items-center align-items-lg-center">
+					<div class="header-column flex-row flex-lg-column justify-content-center justify-content-lg-center align-items-center align-items-lg-center" style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 10;">
 						<img alt="Porto" width="120" height="58" data-sticky-width="82" data-sticky-height="40" data-sticky-top="0" src="~/images/logo2.png">
 					</div>
 							<div class="header-column flex-row flex-lg-column justify-content-end justify-content-lg-center align-items-center align-items-lg-end">
@@ -125,6 +189,19 @@
 											<i class="fa fa-brands fa-whatsapp text-5 position-relative top-2 me-1"></i> Whatsapp
 										</a>
 									</li>
+									@if (User.Identity != null && User.Identity.IsAuthenticated)
+									{
+										<li class="list-inline-item hover-effect-2 mb-0 me-0" style="border-left:1px solid rgba(255,255,255,0.15);padding-left:16px;margin-left:8px;">
+											<a href="~/Admin/Index" class="text-decoration-none font-weight-bold text-1" style="color:#EA1C21;" title="Admin Paneli">
+												<i class="fas fa-user-shield me-1"></i> Admin
+											</a>
+										</li>
+										<li class="list-inline-item hover-effect-2 mb-0 me-0" style="margin-left:12px;">
+											<a href="~/Admin/Logout" class="text-decoration-none font-weight-bold text-1" style="color:rgba(255,255,255,0.55);" title="Çıkış Yap">
+												<i class="fas fa-right-from-bracket me-1"></i> Çıkış
+											</a>
+										</li>
+									}
 									@*<li class="list-inline-item hover-effect-2 mb-0">
 										<a href="https://www.facebook.com/" class="text-decoration-none font-weight-bold text-color-light text-1" target="_blank">
 											<i class="fab fa-facebook-f text-5 position-relative top-2 me-1"></i> FACEBOOK
@@ -152,10 +229,10 @@
 						</div>
 						<div class="col-auto">
 							<ul class="list list-inline list-unstyled text-center text-md-start mb-0">
-								<li class="list-inline-item px-2 mx-3 mb-3 mb-sm-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="#home" class="text-color-light font-weight-bold">Anasayfa</a></li>
-								<li class="list-inline-item px-2 mx-3 mb-3 mb-sm-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="#tour" class="text-color-light font-weight-bold">Hakkımızda</a></li>
+								<li class="list-inline-item px-2 mx-3 mb-3 mb-sm-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="~/Home/Index#home" class="text-color-light font-weight-bold">Anasayfa</a></li>
+								<li class="list-inline-item px-2 mx-3 mb-3 mb-sm-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="~/Home/Index#about" class="text-color-light font-weight-bold">Hakkımızda</a></li>
 							
-								<li class="list-inline-item px-2 mx-3 mb-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="#news" class="text-color-light font-weight-bold">Ürünler</a></li>
+								<li class="list-inline-item px-2 mx-3 mb-0"><a data-hash data-hash-offset="0" data-hash-offset-lg="70" href="~/Home/Index#products" class="text-color-light font-weight-bold">Ürünler</a></li>
 								<li class="list-inline-item ps-2 ms-3 mb-0"><a href="#hiddenContactForm" data-bs-toggle="collapse" aria-controls="hiddenContactForm" data-scroll-and-focus class="text-color-light font-weight-bold">İletişim</a></li>
 							</ul>
 						</div>
@@ -211,24 +288,43 @@
 		</a>
 			</footer>
 			<style>
-
+		/* Tier 1 Fancy WhatsApp Button */
 		.float {
 			position: fixed;
 			width: 60px;
 			height: 60px;
 			bottom: 70px;
 			right: 25px;
-			background-color: #1ABC9C;
-			color: #FFF!important;
+			/* Animated Premium Gradient for WhatsApp */
+			background: linear-gradient(45deg, #075E54, #128C7E, #25D366, #1EBEA5);
+			background-size: 300% 300%;
+			color: #FFF !important;
 			border-radius: 50px;
 			text-align: center;
-			font-size: 30px;
+			font-size: 32px;
 			box-shadow: 2px 2px 3px #999;
 			z-index: 100;
+			/* Flowing Gradient Animation */
+			animation: whatsapp-fancy-glow 3s ease infinite, pulse-whatsapp 2s infinite;
 		}
 
 		.my-float {
-			margin-top: 16px;
+			margin-top: 14px;
+			display: inline-block;
+			/* Adding a playful bounce to the icon itself */
+			animation: icon-bounce 2.5s infinite;
+		}
+
+		@@keyframes whatsapp-fancy-glow {
+			0% { background-position: 0% 50%; }
+			50% { background-position: 100% 50%; }
+			100% { background-position: 0% 50%; }
+		}
+
+		@@keyframes icon-bounce {
+			0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+			40% { transform: translateY(-5px); }
+			60% { transform: translateY(-3px); }
 		}
 			</style>
 		<!-- Vendor -->
@@ -247,6 +343,33 @@
 		<!-- Theme Initialization Files -->
 		
 <script src="~/js/theme.init.js"></script>
+    
+    <!-- Tier 1 Interaction Scripts -->
+    <script>
+        // 6. Preloader Logic
+        window.addEventListener('load', function () {
+            const preloader = document.getElementById('tier1-preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.visibility = 'hidden';
+                }, 600); // Wait for the transition
+            }
+        });
+
+        // 7. Scroll Progress Bar Logic
+        window.addEventListener('scroll', function () {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

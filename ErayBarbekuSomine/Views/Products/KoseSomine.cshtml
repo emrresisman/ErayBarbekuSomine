@@ -1,4 +1,6 @@
-ï»¿<div role="main" class="main">
+@model IEnumerable<ErayBarbekuSomine.Models.Image>
+
+<div role="main" class="main">
 
 
 
@@ -7,12 +9,12 @@
 		<div class="container container-xl-custom">
 			<div class="row">
 				<div class="col-md-8 order-2 order-md-1 align-self-center p-static">
-					<h1 class="font-weight-bold">KÃ¶ÅŸe ÅÃ¶mine</h1>
+					<h1 class="font-weight-bold">Köşe Şömine</h1>
 				</div>
 				<div class="col-md-4 order-1 order-md-2 align-self-center">
 					<ul class="breadcrumb d-block text-md-end breadcrumb-light">
 						<li><a href="demo-band.html">Home</a></li>
-						<li class="active"><a href="demo-band-blog.html">KÃ¶ÅŸe ÅÃ¶mine</a></li>
+						<li class="active"><a href="demo-band-blog.html">Köşe Şömine</a></li>
 					</ul>
 				</div>
 			</div>
@@ -29,44 +31,28 @@
 						<div class="col">
 							<article class="border-bottom-0 pb-0 mb-5 pt-4">
 								<p>
-									KÃ¶ÅŸe ÅŸÃ¶mineleri, evlerin atmosferine sÄ±caklÄ±k ve ÅŸÄ±klÄ±k katmak iÃ§in popÃ¼ler bir seÃ§imdir. Bu ÅŸÃ¶mine tasarÄ±mÄ±, odanÄ±n bir kÃ¶ÅŸesinde yer alan bir ÅŸÃ¶mine ÅŸeklindedir ve odayÄ± sÄ±cak bir ortam haline getirir.
+									Köşe şömineleri, evlerin atmosferine sıcaklık ve şıklık katmak için popüler bir seçimdir. Bu şömine tasarımı, odanın bir köşesinde yer alan bir şömine şeklindedir ve odayı sıcak bir ortam haline getirir.
 
 
 
 								</p>
 								<p class="pb-4">
-									KÃ¶ÅŸe ÅŸÃ¶mineleri, geleneksel veya modern bir tasarÄ±mla Ã¼retilebilirler ve birÃ§ok farklÄ± boyutta ve ÅŸekilde mevcutturlar. AhÅŸap, mermer ve metal malzemelerle Ã¼retildikleri iÃ§in her tÃ¼rlÃ¼ ev dekorasyonuna uyum saÄŸlarlar. AyrÄ±ca, yÃ¼ksek kaliteli malzemeler kullanÄ±larak yapÄ±ldÄ±ÄŸÄ±ndan, uzun yÄ±llar boyunca dayanÄ±klÄ± ve kullanÄ±ÅŸlÄ±dÄ±rlar.
+									Köşe şömineleri, geleneksel veya modern bir tasarımla üretilebilirler ve birçok farklı boyutta ve şekilde mevcutturlar. Ahşap, mermer ve metal malzemelerle üretildikleri için her türlü ev dekorasyonuna uyum sağlarlar. Ayrıca, yüksek kaliteli malzemeler kullanılarak yapıldığından, uzun yıllar boyunca dayanıklı ve kullanışlıdırlar.
 
 
 
 								</p>
 
-								<div class="row pb-5">
-									<div class="col-sm-4">
-										<a class="img-thumbnail img-thumbnail-no-borders d-block img-thumbnail-hover-icon lightbox" href="~/images/kosesomine/1.jpg" data-plugin-options="{'type':'image'}">
-											<img class="img-fluid rounded-0" src="~/images/kosesomine/1.jpg" alt="Project Image">
-										</a>
-									</div>
-									<div class="col-sm-4">
-										<a class="img-thumbnail img-thumbnail-no-borders d-block img-thumbnail-hover-icon lightbox" href="~/images/kosesomine/4.jpg" data-plugin-options="{'type':'image'}">
-											<img class="img-fluid rounded-0" src="~/images/kosesomine/4.jpg" alt="Project Image">
-										</a>
-									</div>
-									<div class="col-sm-4">
-										<a class="img-thumbnail img-thumbnail-no-borders d-block img-thumbnail-hover-icon lightbox" href="~/images/kosesomine/3.jpg" data-plugin-options="{'type':'image'}">
-											<img class="img-fluid rounded-0" src="~/images/kosesomine/3.jpg" alt="Project Image">
-										</a>
-									</div>
-								</div>
+								<partial name="_GalleryPartial" model="Model" view-data='new ViewDataDictionary(ViewData) { { "Category", "KoseSomine" } }' />
 
 								<p>
-									KÃ¶ÅŸe ÅŸÃ¶minelerinin en bÃ¼yÃ¼k avantajlarÄ±ndan biri, mekandan tasarruf etmeleridir. OdanÄ±n bir kÃ¶ÅŸesine yerleÅŸtirilerek diÄŸer mobilyalarla uyum saÄŸlayarak, kÃ¼Ã§Ã¼k odalarda bile kullanÄ±mÄ± kolay hale getirir. AyrÄ±ca, bazÄ± modelleri dÃ¶ner Ã¶zelliklere sahip olduÄŸundan, odadaki mobilyalarÄ± da dÃ¶ndÃ¼rebilirsiniz.
+									Köşe şöminelerinin en büyük avantajlarından biri, mekandan tasarruf etmeleridir. Odanın bir köşesine yerleştirilerek diğer mobilyalarla uyum sağlayarak, küçük odalarda bile kullanımı kolay hale getirir. Ayrıca, bazı modelleri döner özelliklere sahip olduğundan, odadaki mobilyaları da döndürebilirsiniz.
 
 
 
 								</p>
 								<p>
-									KÃ¶ÅŸe ÅŸÃ¶mineleri, evinizin herhangi bir odasÄ±nda kullanÄ±labilecek Ã§ok yÃ¶nlÃ¼ bir seÃ§imdir. YalnÄ±zca evinizi sÄ±cak tutmakla kalmaz, aynÄ± zamanda evinize bir karakter ve kiÅŸilik katarlar. Geleneksel veya modern tarzda bir tasarÄ±m seÃ§eneÄŸi olan kÃ¶ÅŸe ÅŸÃ¶mineleri, herhangi bir evin atmosferini mÃ¼kemmel bir ÅŸekilde tamamlar.
+									Köşe şömineleri, evinizin herhangi bir odasında kullanılabilecek çok yönlü bir seçimdir. Yalnızca evinizi sıcak tutmakla kalmaz, aynı zamanda evinize bir karakter ve kişilik katarlar. Geleneksel veya modern tarzda bir tasarım seçeneği olan köşe şömineleri, herhangi bir evin atmosferini mükemmel bir şekilde tamamlar.
 
 
 
@@ -76,14 +62,14 @@
 
 								</p>
 								<a href="https://wa.me/+905312523798?text=Merhaba,%20urunler%20hakkinda%20bilgi%20almak%20istiyorum." class="btn btn-modern btn-primary btn-arrow-effect-1">Whatsapp <i class="fas fa-arrow-right ms-2"></i></a>
-								<a href="tel:+905312523798" class="btn btn-modern btn-danger btn-arrow-effect-1">Fiyat AlÄ±n <i class="fas fa-arrow-right ms-2"></i></a>
+								<a href="tel:+905312523798" class="btn btn-modern btn-danger btn-arrow-effect-1">Fiyat Alın <i class="fas fa-arrow-right ms-2"></i></a>
 								<br /><br />
 								<table class="table text-white">
 
 									<tbody>
 										<tr>
 											<td>
-												FiyatÄ±
+												Fiyatı
 											</td>
 											<td>
 												<b>Sorunuz</b>
@@ -92,7 +78,7 @@
 										</tr>
 										<tr>
 											<td>
-												DÃ¶kÃ¼m Kazan Durumu
+												Döküm Kazan Durumu
 											</td>
 											<td>
 												Var
@@ -101,7 +87,7 @@
 										</tr>
 										<tr>
 											<td>
-												YakÄ±t Tipi
+												Yakıt Tipi
 											</td>
 											<td>
 												Odun
@@ -110,10 +96,10 @@
 										</tr>
 										<tr>
 											<td>
-												ÅÃ¶mine YapÄ±m SÃ¼resi
+												Şömine Yapım Süresi
 											</td>
 											<td>
-												1-3 GÃ¼n
+												1-3 Gün
 											</td>
 
 										</tr>

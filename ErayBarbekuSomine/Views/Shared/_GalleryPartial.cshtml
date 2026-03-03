@@ -1,0 +1,145 @@
+@model IEnumerable<ErayBarbekuSomine.Models.Image>
+@{
+    var category = ViewData["Category"]?.ToString();
+    var isAdmin = User.Identity != null && User.Identity.IsAuthenticated;
+}
+
+<div class="row pb-5 position-relative" id="gallery-container-@category">
+    @if (isAdmin)
+    {
+        <div class="col-12 mb-3 text-end">
+            <!-- SweetAlert2 CSS/JS for inline frontend use -->
+            <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+            <button class="btn btn-success btn-sm font-weight-bold" onclick="document.getElementById('upload-new-@category').click()"><i class="fas fa-plus"></i> Yeni Resim Ekle</button>
+            <input type="file" id="upload-new-@category" style="display:none;" accept="image/*" onchange="uploadNewImage(this, '@category')" />
+        </div>
+    }
+
+    <div class="row" style="margin:0; padding:0; width:100%;">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var img in Model)
+            {
+                <div class="col-sm-6 col-md-4 mb-4" id="img-wrapper-@img.Id">
+                    <div class="premium-gallery-card h-100 position-relative">
+                        @if (isAdmin)
+                        {
+                            <div class="position-absolute" style="top:20px; right:20px; z-index:999;">
+                                <button class="btn btn-warning btn-sm shadow-sm" title="Değiştir" onclick="document.getElementById('replace-@img.Id').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+                                <button class="btn btn-danger btn-sm shadow-sm" title="Sil" onclick="deleteImage(@img.Id)"><i class="fas fa-trash"></i></button>
+                                <input type="file" id="replace-@img.Id" style="display:none;" accept="image/*" onchange="replaceImage(this, @img.Id, '@category')" />
+                            </div>
+                        }
+
+                        <a class="lightbox d-block gallery-overlay-container" href="@img.FilePath" data-plugin-options="{'type':'image'}">
+                            <img class="img-fluid" src="@img.FilePath" alt="@img.FileName" id="img-src-@img.Id" style="height:250px; width:100%; object-fit:cover;">
+                            <div class="gallery-hover-eff">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-muted">Henüz bu kategori için resim yüklenmemiş.</div>
+        }
+    </div>
+</div>
+
+@if (isAdmin)
+{
+    @Html.AntiForgeryToken()
+    <script>
+        function getAntiforgeryToken() {
+            return document.querySelector('input[name="__RequestVerificationToken"]').value;
+        }
+
+        function uploadNewImage(input, category) {
+            if (!input.files || input.files.length === 0) return;
+            var file = input.files[0];
+            var formData = new FormData();
+            formData.append("file", file);
+            formData.append("category", category);
+            formData.append("__RequestVerificationToken", getAntiforgeryToken());
+
+            Swal.fire({ title: 'Yükleniyor...', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
+
+            $.ajax({
+                url: '/Admin/UploadImage',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    if (res.success) {
+                        Swal.fire('Başarılı', 'Resim Eklendi!', 'success').then(() => location.reload());
+                    } else {
+                        Swal.fire('Hata', res.message, 'error');
+                    }
+                },
+                error: function () { Swal.fire('Hata', 'Sunucu hatası.', 'error'); }
+            });
+            input.value = "";
+        }
+
+        function replaceImage(input, id, category) {
+            if (!input.files || input.files.length === 0) return;
+            var file = input.files[0];
+            var formData = new FormData();
+            formData.append("id", id);
+            formData.append("file", file);
+            formData.append("category", category);
+            formData.append("__RequestVerificationToken", getAntiforgeryToken());
+
+            Swal.fire({ title: 'Değiştiriliyor...', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
+
+            $.ajax({
+                url: '/Admin/ReplaceImage',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    if (res.success) {
+                        // Resmin src'sini güncelle
+                        $('#img-src-' + id).attr('src', res.newUrl + '?t=' + new Date().getTime());
+                        $('#img-src-' + id).parent().attr('href', res.newUrl + '?t=' + new Date().getTime());
+                        Swal.fire('Başarılı', 'Resim başarıyla değiştirildi!', 'success');
+                    } else {
+                        Swal.fire('Hata', res.message, 'error');
+                    }
+                },
+                error: function () { Swal.fire('Hata', 'Sunucu hatası.', 'error'); }
+            });
+            input.value = "";
+        }
+
+        function deleteImage(id) {
+            Swal.fire({
+                title: 'Emin misiniz?', text: "Bu resim kalıcı olarak silinecek.", icon: 'warning',
+                showCancelButton: true, confirmButtonColor: '#d33', confirmButtonText: 'Evet, Sil!', cancelButtonText: 'İptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/Admin/DeleteImage',
+                        type: 'POST',
+                        data: { id: id, __RequestVerificationToken: getAntiforgeryToken() },
+                        success: function (res) {
+                            if (res.success) {
+                                $("#img-wrapper-" + id).fadeOut(300, function() { $(this).remove(); });
+                                Swal.fire('Silindi!', 'Resim silindi.', 'success');
+                            } else {
+                                Swal.fire('Hata', res.message, 'error');
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

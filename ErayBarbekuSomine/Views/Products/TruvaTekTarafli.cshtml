@@ -1,4 +1,6 @@
-ï»¿<div role="main" class="main">
+@model IEnumerable<ErayBarbekuSomine.Models.Image>
+
+<div role="main" class="main">
 
 
 
@@ -7,12 +9,12 @@
 		<div class="container container-xl-custom">
 			<div class="row">
 				<div class="col-md-8 order-2 order-md-1 align-self-center p-static">
-					<h1 class="font-weight-bold">Truva Tek TaraflÄ± BarbekÃ¼</h1>
+					<h1 class="font-weight-bold">Truva Tek Taraflı Barbekü</h1>
 				</div>
 				<div class="col-md-4 order-1 order-md-2 align-self-center">
 					<ul class="breadcrumb d-block text-md-end breadcrumb-light">
 						<li><a href="demo-band.html">Home</a></li>
-						<li class="active"><a href="demo-band-blog.html">Truva Tek TaraflÄ± BarbekÃ¼</a></li>
+						<li class="active"><a href="demo-band-blog.html">Truva Tek Taraflı Barbekü</a></li>
 					</ul>
 				</div>
 			</div>
@@ -29,7 +31,7 @@
 						<div class="col">
 							<article class="border-bottom-0 pb-0 mb-5 pt-4">
 								<p>
-									Truva Tek TaraflÄ± ÅÃ¶mine, evinize hem sÄ±caklÄ±k hem de ÅŸÄ±klÄ±k katan bir tasarÄ±mdÄ±r. Bu ÅŸÃ¶mineler, evinizi Ä±sÄ±tmanÄ±n yanÄ± sÄ±ra, yemek piÅŸirme Ã¶zelliÄŸi sunan bir fÄ±rÄ±n bÃ¶lmesi ile donatÄ±lmÄ±ÅŸtÄ±r. Truva Tek TaraflÄ± ÅÃ¶mine, evinize modern bir dokunuÅŸ katan zarif tasarÄ±mÄ± ile Ã¶ne Ã§Ä±kar. ÅÃ¶minenin ekstra bir fÄ±rÄ±n bÃ¶lmesi ile donatÄ±lmÄ±ÅŸ olmasÄ±, evde yemek piÅŸirmek isteyenler iÃ§in idealdir.
+									Truva Tek Taraflı Şömine, evinize hem sıcaklık hem de şıklık katan bir tasarımdır. Bu şömineler, evinizi ısıtmanın yanı sıra, yemek pişirme özelliği sunan bir fırın bölmesi ile donatılmıştır. Truva Tek Taraflı Şömine, evinize modern bir dokunuş katan zarif tasarımı ile öne çıkar. Şöminenin ekstra bir fırın bölmesi ile donatılmış olması, evde yemek pişirmek isteyenler için idealdir.
 
 
 
@@ -43,7 +45,7 @@
 
 								</p>
 								<p class="pb-4">
-									Truva Tek TaraflÄ± ÅÃ¶mine, evinizi sÄ±cak tutarken aynÄ± zamanda yemek piÅŸirmenizi saÄŸlar. ÅÃ¶minenin saÄŸ tarafÄ±nda bulunan ekstra fÄ±rÄ±n bÃ¶lmesi ile yemeklerinizi piÅŸirebilirsiniz. Bu Ã¶zellik sayesinde, Truva Tek TaraflÄ± ÅÃ¶mine, yalnÄ±zca evinizi Ä±sÄ±tmakla kalmaz, aynÄ± zamanda evde yemek piÅŸirme deneyimini de keyifli hale getirir.
+									Truva Tek Taraflı Şömine, evinizi sıcak tutarken aynı zamanda yemek pişirmenizi sağlar. Şöminenin sağ tarafında bulunan ekstra fırın bölmesi ile yemeklerinizi pişirebilirsiniz. Bu özellik sayesinde, Truva Tek Taraflı Şömine, yalnızca evinizi ısıtmakla kalmaz, aynı zamanda evde yemek pişirme deneyimini de keyifli hale getirir.
 
 
 
@@ -59,26 +61,10 @@
 
 								</p>
 
-								<div class="row pb-5">
-									<div class="col-sm-4">
-										<a class="img-thumbnail img-thumbnail-no-borders d-block img-thumbnail-hover-icon lightbox" href="~/images/truvatektaraflÄ±/1.jpg" data-plugin-options="{'type':'image'}">
-											<img class="img-fluid rounded-0" src="~/images/truvatektaraflÄ±/1.jpg" alt="Project Image">
-										</a>
-									</div>
-									<div class="col-sm-4">
-										<a class="img-thumbnail img-thumbnail-no-borders d-block img-thumbnail-hover-icon lightbox" href="~/images/truvatektaraflÄ±/8.jpg" data-plugin-options="{'type':'image'}">
-											<img class="img-fluid rounded-0" src="~/images/truvatektaraflÄ±/8.jpg" alt="Project Image">
-										</a>
-									</div>
-									<div class="col-sm-4">
-										<a class="img-thumbnail img-thumbnail-no-borders d-block img-thumbnail-hover-icon lightbox" href="~/images/truvatektaraflÄ±/2.jpg" data-plugin-options="{'type':'image'}">
-											<img class="img-fluid rounded-0" src="~/images/truvatektaraflÄ±/3.jpg" alt="Project Image">
-										</a>
-									</div>
-								</div>
+								<partial name="_GalleryPartial" model="Model" view-data='new ViewDataDictionary(ViewData) { { "Category", "TruvaTekTarafli" } }' />
 
 								<p>
-									Truva Tek TaraflÄ± ÅÃ¶minenin tek taraflÄ± tasarÄ±mÄ±, evinize zarif bir dokunuÅŸ katar. ÅÃ¶minenin cam panelleri, alevleri ve Ä±sÄ±nÄ±n yayÄ±lmasÄ±nÄ± gÃ¶zlemlemek iÃ§in harika bir fÄ±rsat sunar. AyrÄ±ca, ÅŸÃ¶minenin iÃ§indeki fÄ±rÄ±n bÃ¶lmesi, evde yemek piÅŸirmenin keyifli bir deneyim haline gelmesini saÄŸlar.
+									Truva Tek Taraflı Şöminenin tek taraflı tasarımı, evinize zarif bir dokunuş katar. Şöminenin cam panelleri, alevleri ve ısının yayılmasını gözlemlemek için harika bir fırsat sunar. Ayrıca, şöminenin içindeki fırın bölmesi, evde yemek pişirmenin keyifli bir deneyim haline gelmesini sağlar.
 
 
 
@@ -92,9 +78,9 @@
 
 								</p>
 								<p>
-									Truva Tek TaraflÄ± ÅÃ¶minenin ekstra fÄ±rÄ±n bÃ¶lmesi, evde yemek piÅŸirmek isteyenler iÃ§in idealdir. FÄ±rÄ±n bÃ¶lmesi, saÄŸ tarafta bulunur ve Ã§eÅŸitli yemekler piÅŸirmek iÃ§in yeterli bÃ¼yÃ¼klÃ¼ktedir. Bu Ã¶zellik, evinizde yemek piÅŸirmeyi seviyorsanÄ±z ya da Ã¶zel gÃ¼nlerde misafirlerinizi aÄŸÄ±rlamak istiyorsanÄ±z, Truva Tek TaraflÄ± ÅÃ¶minenin size sunabileceÄŸi harika bir fÄ±rsattÄ±r.
+									Truva Tek Taraflı Şöminenin ekstra fırın bölmesi, evde yemek pişirmek isteyenler için idealdir. Fırın bölmesi, sağ tarafta bulunur ve çeşitli yemekler pişirmek için yeterli büyüklüktedir. Bu özellik, evinizde yemek pişirmeyi seviyorsanız ya da özel günlerde misafirlerinizi ağırlamak istiyorsanız, Truva Tek Taraflı Şöminenin size sunabileceği harika bir fırsattır.
 
-									Truva Tek TaraflÄ± ÅÃ¶mine, evinizi sÄ±cak tutmanÄ±n yanÄ± sÄ±ra, yemek piÅŸirmek iÃ§in de ideal bir seÃ§enektir. ÅÃ¶minenin saÄŸ tarafÄ±nda bulunan ekstra fÄ±rÄ±n bÃ¶lmesi, evde yemek piÅŸirmeyi keyifli hale getirir. AyrÄ±ca, ÅŸÃ¶minenin zarif tasarÄ±mÄ± evinizin dekorasyonuna da uyum saÄŸlar.
+									Truva Tek Taraflı Şömine, evinizi sıcak tutmanın yanı sıra, yemek pişirmek için de ideal bir seçenektir. Şöminenin sağ tarafında bulunan ekstra fırın bölmesi, evde yemek pişirmeyi keyifli hale getirir. Ayrıca, şöminenin zarif tasarımı evinizin dekorasyonuna da uyum sağlar.
 
 
 
@@ -118,14 +104,14 @@
 								</p>
 
 								<a href="https://wa.me/+905312523798?text=Merhaba,%20urunler%20hakkinda%20bilgi%20almak%20istiyorum." class="btn btn-modern btn-primary btn-arrow-effect-1">Whatsapp <i class="fas fa-arrow-right ms-2"></i></a>
-								<a href="tel:+905312523798" class="btn btn-modern btn-danger btn-arrow-effect-1">Fiyat AlÄ±n <i class="fas fa-arrow-right ms-2"></i></a>
+								<a href="tel:+905312523798" class="btn btn-modern btn-danger btn-arrow-effect-1">Fiyat Alın <i class="fas fa-arrow-right ms-2"></i></a>
 								<br /><br />
 								<table class="table text-white">
 
 									<tbody>
 										<tr>
 											<td>
-												FiyatÄ±
+												Fiyatı
 											</td>
 											<td>
 												<b>Sorunuz</b>
@@ -134,7 +120,7 @@
 										</tr>
 										<tr>
 											<td>
-												BarbekÃ¼ GeniÅŸlik
+												Barbekü Genişlik
 											</td>
 											<td>
 												80 cm
@@ -143,7 +129,7 @@
 										</tr>
 										<tr>
 											<td>
-												YÃ¼kseklik
+												Yükseklik
 											</td>
 											<td>
 												250 cm
@@ -152,7 +138,7 @@
 										</tr>
 										<tr>
 											<td>
-												BarbekÃ¼ Derinlik
+												Barbekü Derinlik
 											</td>
 											<td>
 												70 cm
@@ -161,7 +147,7 @@
 										</tr>
 										<tr>
 											<td>
-												BarbekÃ¼ Ä°Ã§ Hazne GeniÅŸlik
+												Barbekü İç Hazne Genişlik
 											</td>
 											<td>
 												60 cm
@@ -170,7 +156,7 @@
 										</tr>
 										<tr>
 											<td>
-												BarbekÃ¼ Ä°Ã§ Hazne Derinlik
+												Barbekü İç Hazne Derinlik
 											</td>
 											<td>
 												50 cm
@@ -179,7 +165,7 @@
 										</tr>
 										<tr>
 											<td>
-												BarbekÃ¼ YapÄ±m SÃ¼resi
+												Barbekü Yapım Süresi
 											</td>
 											<td>
 												3-5 Saat
@@ -188,7 +174,7 @@
 										</tr>
 										<tr>
 											<td>
-												Tezgah GeniÅŸlik
+												Tezgah Genişlik
 											</td>
 											<td>
 												80 cm

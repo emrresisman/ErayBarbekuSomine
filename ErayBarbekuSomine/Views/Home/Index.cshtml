@@ -1,4 +1,5 @@
-﻿
+﻿@model Dictionary<string, ErayBarbekuSomine.Models.Image>
+
 @{
     string sliderPath1 = Url.Content("~/images/slider.webp");
     string sliderPath2 = Url.Content("~/images/kosesomine/1.jpg");
@@ -8,6 +9,10 @@
     string sliderPath6 = Url.Content("~/images/truvatektaraflı/1.jpg");
     string sliderPath7 = Url.Content("~/images/utipi/2.jpg");
 	string slider3 = Url.Content("~/images/slider3.jpg");
+    var isAdmin = User.Identity != null && User.Identity.IsAuthenticated;
+    string GetImagePath(string category, string defaultPath) {
+        return Model != null && Model.ContainsKey(category) ? Model[category].FilePath : defaultPath;
+    }
 
 
 }
@@ -313,8 +318,8 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col">
-								<p class="font-weight-bold line-height-9 text-4 mb-4 pb-2 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="700">Biz, şömine tutkunlarından oluşan bir ekibiz ve Türkiye'de en iyi kalitede şömineleri sunmaktan gurur duyuyoruz.</p>
+							<div class="col subtle-glass-panel appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="600">
+								<p class="font-weight-bold line-height-9 text-4 mb-4 pb-2 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="700" style="color: #fff;">Biz, şömine tutkunlarından oluşan bir ekibiz ve Türkiye'de en iyi kalitede şömineleri sunmaktan gurur duyuyoruz.</p>
 						<p class="line-height-9 mb-4 pb-2 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="850">
 							Şirketimiz, uzun yıllara dayanan deneyimi ve tecrübeyi bünyesinde barındıran bir ekip tarafından kuruldu. Amacımız, müşterilerimize evlerinde sıcak ve romantik bir atmosfer yaratmalarına yardımcı olacak kaliteli şömineler sunmaktır. Bununla birlikte, müşterilerimizin ihtiyaçlarını karşılamak için sunduğumuz birçok farklı seçenek arasından seçim yapmalarını sağlamak için çalışıyoruz.
 
@@ -329,7 +334,7 @@
 
 
 						</p>
-						<p class="line-height-9 mb-0 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1300">
+						<p class="line-height-9 mb-0 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1300" style="color: #fff; font-style: italic;">
 							Bizimle birlikte çalışarak, evinizde sıcak bir atmosfer yaratabilir ve aynı zamanda şık ve modern bir görünüm elde edebilirsiniz. Şöminelerimizin kalitesi ve sunduğumuz profesyonel hizmetle ilgili daha fazla bilgi için, lütfen bizimle iletişime geçin.
 
 
@@ -365,10 +370,16 @@
 			</div>
 			<br />
 			<div class="row">
-				<div class="col-sm-6 col-lg-3 px-0">
-					<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
-						<div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
-							<img height="600px" src="~/images/duzcepheli/1.jpg" class="img-fluid" alt="">
+				<div class="col-sm-6 col-lg-3 px-0 position-relative">
+    @if(isAdmin) {
+        <div class="position-absolute" style="top:10px; right:10px; z-index:999;">
+            <button class="btn btn-warning btn-sm p-1 px-2 shadow-sm" title="Vitrini Değiştir" onclick="document.getElementById('edit-cover-DuzCepheliSomine').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+            <input type="file" id="edit-cover-DuzCepheliSomine" style="display:none;" accept="image/*" onchange="updateCover(this, 'DuzCepheliSomine')" />
+        </div>
+    }
+    <div class="glass-product-wrap custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+        <div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
+            <img src="@GetImagePath("DuzCepheliSomine", "/images/duzcepheli/1.jpg")" id="cover-img-DuzCepheliSomine" class="img-fluid" style="height: 600px; width: 100%; object-fit: cover;" alt="">
 							<div class="thumb-info-title bg-transparent">
 								<div class="thumb-info-inner line-height-1 custom-font-size-1 custom-font-primary"><a href="~/Products/DuzCepheliSomine">Düz Cepheli Şömine</a></div>
 
@@ -382,10 +393,16 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6 col-lg-3 px-0">
-					<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
-						<div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
-							<img height="600px" src="~/images/kosesomine/1.jpg" class="img-fluid" alt="">
+				<div class="col-sm-6 col-lg-3 px-0 position-relative">
+    @if(isAdmin) {
+        <div class="position-absolute" style="top:10px; right:10px; z-index:999;">
+            <button class="btn btn-warning btn-sm p-1 px-2 shadow-sm" title="Vitrini Değiştir" onclick="document.getElementById('edit-cover-KoseSomine').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+            <input type="file" id="edit-cover-KoseSomine" style="display:none;" accept="image/*" onchange="updateCover(this, 'KoseSomine')" />
+        </div>
+    }
+    <div class="glass-product-wrap custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+        <div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
+            <img src="@GetImagePath("KoseSomine", "/images/kosesomine/1.jpg")" id="cover-img-KoseSomine" class="img-fluid" style="height: 600px; width: 100%; object-fit: cover;" alt="">
 							<div class="thumb-info-title bg-transparent">
 								<div class="thumb-info-inner line-height-1 custom-font-size-1 custom-font-primary"><a href="~/Products/KoseSomine">Köşe Şömine</a></div>
 
@@ -399,10 +416,16 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6 col-lg-3 px-0">
-					<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
-						<div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
-							<img src="~/images/ltipisomine/5.jpg" class="img-fluid" alt="">
+				<div class="col-sm-6 col-lg-3 px-0 position-relative">
+    @if(isAdmin) {
+        <div class="position-absolute" style="top:10px; right:10px; z-index:999;">
+            <button class="btn btn-warning btn-sm p-1 px-2 shadow-sm" title="Vitrini Değiştir" onclick="document.getElementById('edit-cover-LTipiSomine').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+            <input type="file" id="edit-cover-LTipiSomine" style="display:none;" accept="image/*" onchange="updateCover(this, 'LTipiSomine')" />
+        </div>
+    }
+    <div class="glass-product-wrap custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+        <div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
+            <img src="@GetImagePath("LTipiSomine", "/images/ltipisomine/5.jpg")" id="cover-img-LTipiSomine" class="img-fluid" style="height: 600px; width: 100%; object-fit: cover;" alt="">
 							<div class="thumb-info-title bg-transparent">
 								<div class="thumb-info-inner line-height-1 custom-font-size-1 custom-font-primary"><a href="~/Products/LTipiSomine">L Tipi Şömine</a></div>
 
@@ -419,10 +442,16 @@
 
 
 
-				<div class="col-sm-6 col-lg-3 px-0">
-					<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
-						<div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
-							<img src="~/images/utipi/1.jpg" class="img-fluid" alt="">
+				<div class="col-sm-6 col-lg-3 px-0 position-relative">
+    @if(isAdmin) {
+        <div class="position-absolute" style="top:10px; right:10px; z-index:999;">
+            <button class="btn btn-warning btn-sm p-1 px-2 shadow-sm" title="Vitrini Değiştir" onclick="document.getElementById('edit-cover-UTipiSomine').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+            <input type="file" id="edit-cover-UTipiSomine" style="display:none;" accept="image/*" onchange="updateCover(this, 'UTipiSomine')" />
+        </div>
+    }
+    <div class="glass-product-wrap custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+        <div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
+            <img src="@GetImagePath("UTipiSomine", "/images/utipi/1.jpg")" id="cover-img-UTipiSomine" class="img-fluid" style="height: 600px; width: 100%; object-fit: cover;" alt="">
 							<div class="thumb-info-title bg-transparent">
 								<div class="thumb-info-inner line-height-1 custom-font-size-1 custom-font-primary"><a href="~/Products/UTipiSomine">U Tipi Şömine</a></div>
 
@@ -460,10 +489,16 @@
 			</div>
 			<br />
 					<div class="row">
-						@*<div class="col-sm-6 col-lg-3 px-0">
-							<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
-								<div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
-							<img height="600px" src="~/images/duzcepheli/1.jpg" class="img-fluid" alt="">
+						@*<div class="col-sm-6 col-lg-3 px-0 position-relative">
+    @if(isAdmin) {
+        <div class="position-absolute" style="top:10px; right:10px; z-index:999;">
+            <button class="btn btn-warning btn-sm p-1 px-2 shadow-sm" title="Vitrini Değiştir" onclick="document.getElementById('edit-cover-DuzCepheliSomine').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+            <input type="file" id="edit-cover-DuzCepheliSomine" style="display:none;" accept="image/*" onchange="updateCover(this, 'DuzCepheliSomine')" />
+        </div>
+    }
+    <div class="glass-product-wrap custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+        <div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
+            <img src="@GetImagePath("DuzCepheliSomine", "/images/duzcepheli/1.jpg")" id="cover-img-DuzCepheliSomine" class="img-fluid" style="height: 600px; width: 100%; object-fit: cover;" alt="">
 									<div class="thumb-info-title bg-transparent">
 										<div class="thumb-info-inner line-height-1 custom-font-size-1 custom-font-primary">Düz Cepheli Şömine</div>
 									
@@ -477,10 +512,16 @@
 								</div>
 							</div>
 						</div>*@
-					@*	<div class="col-sm-6 col-lg-3 px-0">
-							<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
-								<div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
-							<img height="600px" src="~/images/kosesomine/1.jpg" class="img-fluid" alt="">
+					@*	<div class="col-sm-6 col-lg-3 px-0 position-relative">
+    @if(isAdmin) {
+        <div class="position-absolute" style="top:10px; right:10px; z-index:999;">
+            <button class="btn btn-warning btn-sm p-1 px-2 shadow-sm" title="Vitrini Değiştir" onclick="document.getElementById('edit-cover-KoseSomine').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+            <input type="file" id="edit-cover-KoseSomine" style="display:none;" accept="image/*" onchange="updateCover(this, 'KoseSomine')" />
+        </div>
+    }
+    <div class="glass-product-wrap custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+        <div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
+            <img src="@GetImagePath("KoseSomine", "/images/kosesomine/1.jpg")" id="cover-img-KoseSomine" class="img-fluid" style="height: 600px; width: 100%; object-fit: cover;" alt="">
 									<div class="thumb-info-title bg-transparent">
 										<div class="thumb-info-inner line-height-1 custom-font-size-1 custom-font-primary">Köşe Şömine</div>
 										
@@ -494,10 +535,16 @@
 								</div>
 							</div>
 						</div>*@
-						@*<div class="col-sm-6 col-lg-3 px-0">
-							<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
-								<div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
-								<img  src="~/images/ltipisomine/5.jpg" class="img-fluid" alt="">
+						@*<div class="col-sm-6 col-lg-3 px-0 position-relative">
+    @if(isAdmin) {
+        <div class="position-absolute" style="top:10px; right:10px; z-index:999;">
+            <button class="btn btn-warning btn-sm p-1 px-2 shadow-sm" title="Vitrini Değiştir" onclick="document.getElementById('edit-cover-LTipiSomine').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+            <input type="file" id="edit-cover-LTipiSomine" style="display:none;" accept="image/*" onchange="updateCover(this, 'LTipiSomine')" />
+        </div>
+    }
+    <div class="glass-product-wrap custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+        <div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
+            <img src="@GetImagePath("LTipiSomine", "/images/ltipisomine/5.jpg")" id="cover-img-LTipiSomine" class="img-fluid" style="height: 600px; width: 100%; object-fit: cover;" alt="">
 									<div class="thumb-info-title bg-transparent">
 										<div class="thumb-info-inner line-height-1 custom-font-size-1 custom-font-primary">L Tipi Şömine</div>
 										
@@ -511,10 +558,16 @@
 								</div>
 							</div>
 						</div>*@
-						<div class="col-sm-6 col-lg-3 px-0">
-							<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
-								<div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
-							<img src="~/images/truvabarbeku/1.jpg" class="img-fluid" alt="">
+						<div class="col-sm-6 col-lg-3 px-0 position-relative">
+    @if(isAdmin) {
+        <div class="position-absolute" style="top:10px; right:10px; z-index:999;">
+            <button class="btn btn-warning btn-sm p-1 px-2 shadow-sm" title="Vitrini Değiştir" onclick="document.getElementById('edit-cover-TruvaBarbeku').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+            <input type="file" id="edit-cover-TruvaBarbeku" style="display:none;" accept="image/*" onchange="updateCover(this, 'TruvaBarbeku')" />
+        </div>
+    }
+    <div class="glass-product-wrap custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+        <div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
+            <img src="@GetImagePath("TruvaBarbeku", "/images/truvabarbeku/1.jpg")" id="cover-img-TruvaBarbeku" class="img-fluid" style="height: 600px; width: 100%; object-fit: cover;" alt="">
 									<div class="thumb-info-title bg-transparent">
 								<div class="thumb-info-inner line-height-1 custom-font-size-1 custom-font-primary"><a href="~/Products/TruvaBarbeku">Truva Barbekü</a></div>
 										
@@ -528,10 +581,16 @@
 								</div>
 							</div>
 						</div>
-				<div class="col-sm-6 col-lg-3 px-0">
-					<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
-						<div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
-							<img src="~/images/truvacifttarafli/1.jpg" class="img-fluid" alt="">
+				<div class="col-sm-6 col-lg-3 px-0 position-relative">
+    @if(isAdmin) {
+        <div class="position-absolute" style="top:10px; right:10px; z-index:999;">
+            <button class="btn btn-warning btn-sm p-1 px-2 shadow-sm" title="Vitrini Değiştir" onclick="document.getElementById('edit-cover-TruvaCiftTarafli').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+            <input type="file" id="edit-cover-TruvaCiftTarafli" style="display:none;" accept="image/*" onchange="updateCover(this, 'TruvaCiftTarafli')" />
+        </div>
+    }
+    <div class="glass-product-wrap custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+        <div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
+            <img src="@GetImagePath("TruvaCiftTarafli", "/images/truvacifttarafli/1.jpg")" id="cover-img-TruvaCiftTarafli" class="img-fluid" style="height: 600px; width: 100%; object-fit: cover;" alt="">
 							<div class="thumb-info-title bg-transparent">
 								<div class="thumb-info-inner line-height-1 custom-font-size-1 custom-font-primary"><a href="~/Products/TruvaCiftTarafli">Truva Çift Taraflı</a></div>
 
@@ -545,10 +604,16 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6 col-lg-3 px-0">
-					<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
-						<div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
-							<img src="~/images/truvatektaraflı/1.jpg" class="img-fluid" alt="">
+				<div class="col-sm-6 col-lg-3 px-0 position-relative">
+    @if(isAdmin) {
+        <div class="position-absolute" style="top:10px; right:10px; z-index:999;">
+            <button class="btn btn-warning btn-sm p-1 px-2 shadow-sm" title="Vitrini Değiştir" onclick="document.getElementById('edit-cover-TruvaTekTarafli').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+            <input type="file" id="edit-cover-TruvaTekTarafli" style="display:none;" accept="image/*" onchange="updateCover(this, 'TruvaTekTarafli')" />
+        </div>
+    }
+    <div class="glass-product-wrap custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+        <div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
+            <img src="@GetImagePath("TruvaTekTarafli", "/images/truvatektaraflı/1.jpg")" id="cover-img-TruvaTekTarafli" class="img-fluid" style="height: 600px; width: 100%; object-fit: cover;" alt="">
 							<div class="thumb-info-title bg-transparent">
 								<div class="thumb-info-inner line-height-1 custom-font-size-1 custom-font-primary"><a href="~/Products/TruvaTekTarafli">Truva Tek Taraflı</a></div>
 
@@ -563,10 +628,16 @@
 						</div>
 					</div>
 				</div>
-				@*<div class="col-sm-6 col-lg-3 px-0">
-					<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
-						<div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
-							<img src="~/images/utipi/1.jpg" class="img-fluid" alt="">
+				@*<div class="col-sm-6 col-lg-3 px-0 position-relative">
+    @if(isAdmin) {
+        <div class="position-absolute" style="top:10px; right:10px; z-index:999;">
+            <button class="btn btn-warning btn-sm p-1 px-2 shadow-sm" title="Vitrini Değiştir" onclick="document.getElementById('edit-cover-UTipiSomine').click()"><i class="fas fa-sync-alt"></i> Değiştir</button>
+            <input type="file" id="edit-cover-UTipiSomine" style="display:none;" accept="image/*" onchange="updateCover(this, 'UTipiSomine')" />
+        </div>
+    }
+    <div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-lighten thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+        <div class="thumb-info-wrapper overlay overlay-show overlay-op-5">
+            <img src="@GetImagePath("UTipiSomine", "/images/utipi/1.jpg")" id="cover-img-UTipiSomine" class="img-fluid" style="height: 600px; width: 100%; object-fit: cover;" alt="">
 							<div class="thumb-info-title bg-transparent">
 								<div class="thumb-info-inner line-height-1 custom-font-size-1 custom-font-primary">U Tipi Şömine</div>
 
@@ -596,17 +667,157 @@
 
 
 				
-		<div class="vc_row wpb_row vc_inner pt-5 pb-5 vc_custom_1670381227680 vc_row-has-fill mx-0"><div class="porto-wrap-container container"><div class="row"><div class="py-3 vc_column_container col-md-6"><div class="wpb_wrapper vc_column-inner"><div class="porto-sicon-box mb-0  wpb_custom_1efe903570d178ff0a9b7bfa5febd3a4 style_1 default-icon"><div class="porto-sicon-default"><div class="porto-just-icon-wrapper porto-icon none" style="color:#ffffff;font-size:45px;margin-right:7px;"><i class="fa-solid fa-location-dot"></i></div><br /></div><div class="porto-sicon-header"><h3 class="porto-sicon-title" style="font-weight:700;font-size:18.9px;line-height:1;letter-spacing:0px;color:#ffffff;margin-bottom:8px;">Adres</h3><p style="font-weight:300;font-size:15.12px;line-height:1.4;color:#ffffff;">Sultanselim Mah. Sultan Selim Cd. Bilecik Sk No:6/A
-										<br />Kağıthane/İSTANBUL
-									</p>
-								</div> <!-- header -->
-							</div><!-- porto-sicon-box -->
-						</div>
-					</div><div class="py-3 vc_column_container col-md-6"><div class="wpb_wrapper vc_column-inner"><a class="porto-sicon-box-link" href="tel:1234567890"><div class="porto-sicon-box custom-footer-call mb-0  wpb_custom_1efe903570d178ff0a9b7bfa5febd3a4 style_1 default-icon"><div class="porto-sicon-default"><div class="porto-just-icon-wrapper porto-icon none" style="color:#ffffff;font-size:40px;margin-right:12px;"><i class="fa fa-phone text-5 position-relative top-2 me-1"></i></div></div><br /><div class="porto-sicon-header"><h3 class="porto-sicon-title" style="font-weight:700;font-size:18.9px;line-height:1;letter-spacing:0px;color:#ffffff;margin-bottom:10px;">Bizi Şimdi Arayın</h3><p style="font-weight:400;font-size:15.12px;line-height:1.4;color:#ffffff;">05312523798</p></div> <!-- header --></div><!-- porto-sicon-box --></a></div></div>
+		<!-- TIER 1 PREMIUM CONTACT SECTION -->
+		<section class="section border-0 m-0 py-5" style="background: linear-gradient(to right, #12161A, #1a1e24); position: relative; overflow: hidden;">
+			<!-- Decorative Background Glow -->
+			<div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(234, 28, 33, 0.05) 0%, transparent 70%); pointer-events: none;"></div>
 
-					
+			<div class="container container-xl-custom py-4 position-relative z-index-1">
+				<div class="row text-center mb-5">
+					<div class="col">
+						<h2 class="font-weight-bold text-color-light text-8 mb-2 appear-animation" data-appear-animation="fadeInUpShorter">Bize Ulaşın</h2>
+						<span class="d-block text-color-primary font-weight-semibold text-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">Sıcak Bir Kahve İçin Bekleriz</span>
+					</div>
 				</div>
+
+				<div class="row justify-content-center gap-4">
+					<!-- Address Block -->
+					<div class="col-md-5 col-lg-4 appear-animation" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="400">
+						<div class="premium-contact-box">
+							<div class="icon-wrapper mb-3">
+								<i class="fa-solid fa-location-dot"></i>
+							</div>
+							<h3 class="font-weight-bold text-color-light text-5 mb-2">Adres</h3>
+							<p class="text-color-light opacity-7 mb-0 line-height-7">
+								Sultanselim Mah. Sultan Selim Cd.<br />
+								Bilecik Sk No:6/A<br />
+								Kağıthane / İSTANBUL
+							</p>
+						</div>
+					</div>
+
+					<!-- Phone Block -->
+					<div class="col-md-5 col-lg-4 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="600">
+						<a href="tel:05312523798" class="text-decoration-none d-block h-100">
+							<div class="premium-contact-box hover-effect-glow h-100">
+								<div class="icon-wrapper mb-3 glow-icon">
+									<i class="fa fa-phone"></i>
+								</div>
+								<h3 class="font-weight-bold text-color-light text-5 mb-2">Bizi Şimdi Arayın</h3>
+								<p class="text-color-primary font-weight-bold text-5 mb-0 mt-3 letter-spacing-2">
+									0531 252 37 98
+								</p>
+							</div>
+						</a>
+					</div>
+					</div>
 				</div>
+
+				<!-- TIER 1 GLASS CONTACT FORM -->
+				<div class="row mt-5 justify-content-center">
+					<div class="col-lg-8 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="800">
+						<div class="subtle-glass-panel p-5">
+							<h3 class="font-weight-bold text-color-light text-5 mb-4 text-center">Bize Mesaj Gönderin</h3>
+							<form id="contactForm" onsubmit="submitContactForm(event)">
+								@Html.AntiForgeryToken()
+								<!-- Honeypot Field -->
+								<div style="display:none;" aria-hidden="true">
+									<label for="honeypot">Lütfen bu alanı boş bırakın.</label>
+									<input type="text" id="honeypot" name="honeypot" value="" autocomplete="off" />
+								</div>
+								
+								<div class="row">
+									<div class="form-group col-md-6 mb-3">
+										<input type="text" id="FullName" name="FullName" class="form-control" placeholder="Adınız Soyadınız" required style="background: rgba(0,0,0,0.2) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: #fff !important;">
+									</div>
+									<div class="form-group col-md-6 mb-3">
+										<input type="email" id="Email" name="Email" class="form-control" placeholder="E-posta Adresiniz" required style="background: rgba(0,0,0,0.2) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: #fff !important;">
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-12 mb-3">
+										<input type="text" id="Subject" name="Subject" class="form-control" placeholder="Konu" required style="background: rgba(0,0,0,0.2) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: #fff !important;">
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-12 mb-4">
+										<textarea id="Message" name="Message" rows="5" class="form-control" placeholder="Mesajınız" required style="background: rgba(0,0,0,0.2) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: #fff !important;"></textarea>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12 text-center">
+										<button type="submit" class="btn btn-primary custom-btn-style-1 font-weight-semibold text-color-light text-uppercase w-100" style="background-color: #EA1C21; border: none; padding: 12px 0; border-radius: 8px;">Gönder <i class="fas fa-paper-plane ms-2"></i></button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!-- END TIER 1 PREMIUM CONTACT SECTION -->
+				@if (isAdmin)
+{
+    @Html.AntiForgeryToken()
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function updateCover(input, category) {
+            if (!input.files || input.files.length === 0) return;
+            var file = input.files[0];
+            var formData = new FormData();
+            formData.append("file", file);
+            formData.append("category", category);
+            formData.append("__RequestVerificationToken", document.querySelector('input[name="__RequestVerificationToken"]').value);
+
+            Swal.fire({ title: 'Güncelleniyor...', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
+
+            fetch('/Admin/UpdateCategoryCover', {
+                method: 'POST',
+                body: formData
+            })
+            .then(r => r.json())
+            .then(res => {
+                if (res.success) {
+                    document.getElementById('cover-img-' + category).src = res.newUrl + '?t=' + new Date().getTime();
+                    Swal.fire('Başarılı', 'Vitrin resmi başarıyla değiştirildi!', 'success');
+                } else {
+                    Swal.fire('Hata', res.message, 'error');
+                }
+            })
+            .catch(() => Swal.fire('Hata', 'Sunucu hatası.', 'error'));
+            
+            input.value = "";
+        }
+    </script>
+}
+<!-- Contact Form JS -->
+@if(!isAdmin) {
+    <!-- We still need SweetAlert for guests interacting with the contact form -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+}
+<script>
+    function submitContactForm(e) {
+        e.preventDefault();
+        let formData = new FormData(document.getElementById('contactForm'));
+        Swal.fire({ title: 'Gönderiliyor...', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
+        fetch('/Home/SubmitContactMessage', {
+            method: 'POST',
+            body: formData
+        })
+        .then(r => r.json())
+        .then(res => {
+            if (res.success) {
+                Swal.fire('Başarılı!', res.message, 'success');
+                document.getElementById('contactForm').reset();
+            } else {
+                Swal.fire('Hata!', res.message, 'error');
+            }
+        })
+        .catch(() => Swal.fire('Hata!', 'Sunucu ile iletişim kurulamadı.', 'error'));
+    }
+</script>
+</div>
 			</div>
 		</div>
 			</div> 
@@ -614,4 +825,5 @@
 			
 
 		</div>
+
 

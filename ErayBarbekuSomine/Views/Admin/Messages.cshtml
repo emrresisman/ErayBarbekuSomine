@@ -1,0 +1,107 @@
+@model IEnumerable<ErayBarbekuSomine.Models.ContactMessage>
+@{
+    ViewData["Title"] = "Gelen Mesajlar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div>
+        <h1 style="color:var(--admin-text)"><i class="fas fa-inbox me-2" style="color:var(--admin-red)"></i>Gelen Mesajlar</h1>
+        <p style="color:var(--admin-text-muted)">Müşterilerinizin iletişim formu üzerinden gönderdiği mesajlar.</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header" style="color:var(--admin-text)">
+        <i class="fas fa-envelope-open-text header-icon"></i> Form Mesajları
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table mb-0" style="color:var(--admin-text)">
+                <thead>
+                    <tr>
+                        <th style="background:var(--admin-surface-2);color:var(--admin-text-muted);border-color:var(--admin-border);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;">#</th>
+                        <th style="background:var(--admin-surface-2);color:var(--admin-text-muted);border-color:var(--admin-border);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;">Durum</th>
+                        <th style="background:var(--admin-surface-2);color:var(--admin-text-muted);border-color:var(--admin-border);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;">Ad Soyad</th>
+                        <th style="background:var(--admin-surface-2);color:var(--admin-text-muted);border-color:var(--admin-border);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;">Konu</th>
+                        <th style="background:var(--admin-surface-2);color:var(--admin-text-muted);border-color:var(--admin-border);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;">Tarih</th>
+                        <th style="background:var(--admin-surface-2);color:var(--admin-text-muted);border-color:var(--admin-border);width:110px;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var msg in Model)
+                    {
+                        <tr id="msg-tr-@msg.Id" style="color:var(--admin-text); font-weight:@(msg.IsRead ? "400" : "600"); border-bottom:1px solid var(--admin-border);">
+                            <td style="color:var(--admin-text-muted);border-color:var(--admin-border);padding:0.8rem 1rem;vertical-align:middle;">@msg.Id</td>
+                            <td style="border-color:var(--admin-border);padding:0.8rem 1rem;vertical-align:middle;">
+                                @if (msg.IsRead) {
+                                    <span class="badge-read"><i class="fas fa-envelope-open fa-xs"></i> Okundu</span>
+                                } else {
+                                    <span class="badge-new"><i class="fas fa-envelope fa-xs"></i> Yeni</span>
+                                }
+                            </td>
+                            <td style="color:var(--admin-text);border-color:var(--admin-border);padding:0.8rem 1rem;vertical-align:middle;">@msg.FullName</td>
+                            <td style="color:var(--admin-text);border-color:var(--admin-border);padding:0.8rem 1rem;vertical-align:middle;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">@msg.Subject</td>
+                            <td style="color:var(--admin-text-muted);border-color:var(--admin-border);padding:0.8rem 1rem;vertical-align:middle;white-space:nowrap;">@msg.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td style="border-color:var(--admin-border);padding:0.8rem 1rem;vertical-align:middle;">
+                                <div class="d-flex gap-1">
+                                    <a href="/Admin/MessageDetail/@msg.Id" class="btn btn-sm" title="Mesajı Oku"
+                                       style="background:rgba(79,179,255,0.12);color:#4fb3ff;border:1px solid rgba(79,179,255,0.2);border-radius:6px;padding:4px 8px;">
+                                        <i class="fas fa-eye fa-xs"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-sm" onclick="deleteMessage(@msg.Id)" title="Sil"
+                                            style="background:rgba(234,28,33,0.12);color:#EA1C21;border:1px solid rgba(234,28,33,0.2);border-radius:6px;padding:4px 8px;">
+                                        <i class="fas fa-trash fa-xs"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (!Model.Any()) {
+            <div class="m-3 p-3 rounded-3 text-center" style="background:rgba(79,179,255,0.08);border:1px solid rgba(79,179,255,0.2);color:#4fb3ff;">
+                <i class="fas fa-inbox me-2"></i> Henüz hiç mesaj gönderilmemiş.
+            </div>
+        }
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts {
+    <script>
+        function deleteMessage(id) {
+            Swal.fire({
+                title: 'Emin misiniz?',
+                text: "Bu mesaj kalıcı olarak silinecek!",
+                icon: 'warning',
+                background: '#161b22',
+                color: '#e6edf3',
+                iconColor: '#EA1C21',
+                showCancelButton: true,
+                confirmButtonColor: '#EA1C21',
+                cancelButtonColor: 'rgba(255,255,255,0.1)',
+                confirmButtonText: 'Evet, Sil',
+                cancelButtonText: 'İptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var fd = new FormData();
+                    fd.append("id", id);
+                    fd.append("__RequestVerificationToken", document.querySelector('input[name="__RequestVerificationToken"]').value);
+                    fetch('/Admin/DeleteMessage', { method: 'POST', body: fd })
+                    .then(r => r.json())
+                    .then(res => {
+                        if (res.success) {
+                            Swal.fire({ title: 'Silindi!', text: res.message, icon: 'success', background: '#161b22', color: '#e6edf3', confirmButtonColor: '#EA1C21' });
+                            document.getElementById('msg-tr-' + id)?.remove();
+                        } else {
+                            Swal.fire({ title: 'Hata', text: res.message, icon: 'error', background: '#161b22', color: '#e6edf3', confirmButtonColor: '#EA1C21' });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

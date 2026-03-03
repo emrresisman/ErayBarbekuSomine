@@ -1,0 +1,179 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giriş Yap — Eray Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0e1117;
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background glow */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -200px; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(234,28,33,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 400px;
+            padding: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-card {
+            background: #161b22;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+        }
+
+        .login-header {
+            padding: 2rem 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            background: #1c2128;
+        }
+
+        .brand-icon {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, #EA1C21, #c81018);
+            border-radius: 14px;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: #fff;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 30px rgba(234,28,33,0.4);
+        }
+
+        .login-header h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #e6edf3;
+            margin-bottom: 4px;
+        }
+        .login-header p {
+            font-size: 0.8rem;
+            color: rgba(230,237,243,0.5);
+            margin: 0;
+        }
+
+        .login-body { padding: 2rem; }
+
+        .form-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(230,237,243,0.7);
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            background: #0e1117 !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
+            border-radius: 10px;
+            padding: 0.7rem 1rem;
+            color: #e6edf3 !important;
+            font-size: 0.9rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-control::placeholder { color: rgba(230,237,243,0.3) !important; }
+        .form-control:focus {
+            border-color: #EA1C21 !important;
+            box-shadow: 0 0 0 3px rgba(234,28,33,0.2) !important;
+        }
+
+        .input-icon-wrap { position: relative; }
+        .input-icon-wrap i {
+            position: absolute;
+            left: 12px; top: 50%; transform: translateY(-50%);
+            color: rgba(230,237,243,0.35);
+            font-size: 0.85rem;
+        }
+        .input-icon-wrap .form-control { padding-left: 2.2rem; }
+
+        .btn-login {
+            background: linear-gradient(135deg, #EA1C21, #c81018);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.75rem;
+            width: 100%;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: opacity 0.2s, transform 0.15s;
+            box-shadow: 0 4px 20px rgba(234,28,33,0.35);
+        }
+        .btn-login:hover { opacity: 0.9; transform: translateY(-1px); color: #fff; }
+        .btn-login:active { transform: translateY(0); }
+
+        .alert-danger {
+            background: rgba(234,28,33,0.1);
+            border: 1px solid rgba(234,28,33,0.3);
+            color: #ff6b6b;
+            border-radius: 10px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="brand-icon"><i class="fas fa-fire"></i></div>
+                <h4>Eray Barbekü Şömine</h4>
+                <p>Yönetim paneline giriş yapın</p>
+            </div>
+            <div class="login-body">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger mb-3">
+                        <i class="fas fa-triangle-exclamation me-2"></i>@ViewBag.Error
+                    </div>
+                }
+                <form asp-action="Login" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label class="form-label">Kullanıcı Adı</label>
+                        <div class="input-icon-wrap">
+                            <i class="fas fa-user"></i>
+                            <input type="text" name="username" class="form-control" placeholder="Kullanıcı adınız" required autocomplete="username">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Şifre</label>
+                        <div class="input-icon-wrap">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="password" class="form-control" placeholder="Şifreniz" required autocomplete="current-password">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-login">
+                        Giriş Yap <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <p style="text-align:center; font-size:0.75rem; color:rgba(230,237,243,0.25); margin-top:1.5rem;">
+            &copy; @DateTime.Now.Year Eray Barbekü Şömine
+        </p>
+    </div>
+</body>
+</html>

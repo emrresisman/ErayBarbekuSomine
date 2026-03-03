@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin Panel | Eray Barbekü Şömine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --admin-bg: #0e1117;
+            --admin-surface: #161b22;
+            --admin-surface-2: #1c2128;
+            --admin-border: rgba(255,255,255,0.07);
+            --admin-red: #EA1C21;
+            --admin-red-hover: #c81018;
+            --admin-gold: #f0a500;
+            --admin-text: #e6edf3;
+            --admin-text-muted: rgba(230,237,243,0.55);
+            --admin-sidebar-w: 260px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--admin-bg) !important;
+            color: var(--admin-text) !important;
+            margin: 0;
+        }
+
+        /* Force Bootstrap text to use our palette */
+        p, span, div, label, th, td, li, h1, h2, h3, h4, h5, h6, small, strong, a {
+            color: inherit;
+        }
+        .text-muted, .text-secondary { color: var(--admin-text-muted) !important; }
+        .text-dark { color: var(--admin-text) !important; }
+        .text-gray-800, .text-gray-600, .text-gray-300 { color: var(--admin-text-muted) !important; }
+
+        /* ─── SIDEBAR ─── */
+        #sidebar {
+            min-height: 100vh;
+            width: var(--admin-sidebar-w);
+            position: fixed;
+            top: 0; left: 0;
+            background: var(--admin-surface);
+            border-right: 1px solid var(--admin-border);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1.4rem 1.5rem;
+            text-decoration: none;
+            border-bottom: 1px solid var(--admin-border);
+        }
+        .sidebar-brand .brand-icon {
+            width: 38px; height: 38px;
+            background: var(--admin-red);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 0 16px rgba(234,28,33,0.4);
+        }
+        .sidebar-brand .brand-text {
+            display: flex; flex-direction: column;
+        }
+        .sidebar-brand .brand-text strong {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--admin-text);
+            letter-spacing: 0.02em;
+        }
+        .sidebar-brand .brand-text small {
+            font-size: 0.7rem;
+            color: var(--admin-text-muted);
+        }
+
+        .sidebar-section-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--admin-text-muted);
+            text-transform: uppercase;
+            padding: 1.2rem 1.5rem 0.4rem;
+        }
+
+        #sidebar .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.65rem 1.5rem;
+            color: var(--admin-text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 0;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s, padding-left 0.2s;
+            border-left: 3px solid transparent;
+        }
+        #sidebar .nav-link i {
+            width: 18px; text-align: center; font-size: 0.875rem;
+        }
+        #sidebar .nav-link:hover {
+            background: rgba(234,28,33,0.06);
+            color: var(--admin-text);
+            padding-left: 1.8rem;
+        }
+        #sidebar .nav-link.active {
+            background: rgba(234,28,33,0.12);
+            color: var(--admin-red);
+            border-left-color: var(--admin-red);
+            font-weight: 600;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding: 1.2rem 1.5rem;
+            border-top: 1px solid var(--admin-border);
+        }
+        .sidebar-bottom a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--admin-text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.6rem 1rem;
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+            border: 1px solid var(--admin-border);
+            transition: all 0.2s;
+        }
+        .sidebar-bottom a:hover {
+            background: rgba(255,255,255,0.08);
+            color: var(--admin-text);
+        }
+
+        /* ─── TOPBAR ─── */
+        .topbar {
+            height: 64px;
+            background: var(--admin-surface);
+            border-bottom: 1px solid var(--admin-border);
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky; top: 0; z-index: 50;
+        }
+        .topbar-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--admin-text);
+        }
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .topbar-user {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--admin-border);
+            border-radius: 8px;
+            padding: 0.4rem 0.9rem;
+            font-size: 0.83rem;
+            color: var(--admin-text-muted);
+        }
+        .topbar-user .user-avatar {
+            width: 28px; height: 28px;
+            background: var(--admin-red);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem;
+            color: #fff;
+        }
+        .btn-logout {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: 1px solid rgba(234,28,33,0.4);
+            color: var(--admin-red);
+            padding: 0.38rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.83rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-logout:hover {
+            background: var(--admin-red);
+            color: #fff;
+            border-color: var(--admin-red);
+        }
+
+        /* ─── CONTENT ─── */
+        #content-wrapper {
+            margin-left: var(--admin-sidebar-w);
+            width: calc(100% - var(--admin-sidebar-w));
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            padding: 1.8rem;
+            flex: 1;
+        }
+
+        /* ─── PAGE HEADER ─── */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        .page-header h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--admin-text);
+            margin: 0;
+        }
+        .page-header p {
+            font-size: 0.83rem;
+            color: var(--admin-text-muted);
+            margin: 3px 0 0;
+        }
+
+        /* ─── CARDS ─── */
+        .card {
+            background: var(--admin-surface);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .card-header {
+            background: var(--admin-surface-2);
+            border-bottom: 1px solid var(--admin-border);
+            padding: 1rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--admin-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-header .header-icon {
+            color: var(--admin-red);
+        }
+        .card-body {
+            padding: 1.25rem;
+        }
+        .card-footer {
+            background: var(--admin-surface-2);
+            border-top: 1px solid var(--admin-border);
+            padding: 0.85rem 1.25rem;
+        }
+
+        /* ─── STATS CARDS ─── */
+        .stat-card {
+            background: var(--admin-surface);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .stat-card:hover {
+            border-color: var(--admin-red);
+            transform: translateY(-2px);
+        }
+        .stat-icon {
+            width: 52px; height: 52px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .stat-icon.red { background: rgba(234,28,33,0.15); color: var(--admin-red); }
+        .stat-icon.gold { background: rgba(240,165,0,0.15); color: var(--admin-gold); }
+        .stat-icon.blue { background: rgba(79,179,255,0.12); color: #4fb3ff; }
+        .stat-icon.green { background: rgba(34,197,94,0.12); color: #22c55e; }
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--admin-text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--admin-text);
+            line-height: 1;
+        }
+
+        /* ─── TABLES ─── */
+        .table {
+            color: var(--admin-text);
+            border-color: var(--admin-border);
+            font-size: 0.87rem;
+        }
+        .table > :not(caption) > * > * {
+            background-color: transparent !important;
+            color: var(--admin-text);
+            border-color: var(--admin-border);
+        }
+        .table thead th {
+            background: var(--admin-surface-2) !important;
+            color: var(--admin-text-muted);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border-color: var(--admin-border);
+            padding: 0.75rem 1rem;
+        }
+        .table tbody td {
+            background-color: transparent !important;
+            border-color: var(--admin-border);
+            padding: 0.75rem 1rem;
+            vertical-align: middle;
+            color: var(--admin-text);
+        }
+        .table tbody tr { background-color: transparent !important; }
+        .table tbody tr:hover > td { background-color: rgba(255,255,255,0.03) !important; }
+
+        /* ─── BADGES ─── */
+        .badge-new {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: rgba(234,28,33,0.15);
+            color: var(--admin-red);
+            border: 1px solid rgba(234,28,33,0.3);
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+        .badge-read {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: rgba(255,255,255,0.05);
+            color: var(--admin-text-muted);
+            border: 1px solid var(--admin-border);
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        /* ─── FORMS / INPUTS ─── */
+        .form-control, .form-select {
+            background: var(--admin-surface-2) !important;
+            border: 1px solid var(--admin-border) !important;
+            color: var(--admin-text) !important;
+            border-radius: 8px;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--admin-red) !important;
+            box-shadow: 0 0 0 3px rgba(234,28,33,0.15) !important;
+            background: var(--admin-surface) !important;
+        }
+        .form-control::placeholder { color: var(--admin-text-muted) !important; }
+        .form-label { font-size: 0.83rem; font-weight: 500; color: var(--admin-text); }
+
+        /* ─── BUTTONS ─── */
+        .btn-admin-primary {
+            background: var(--admin-red);
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.875rem;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .btn-admin-primary:hover { background: var(--admin-red-hover); transform: translateY(-1px); color: #fff; }
+
+        /* ─── DROPZONE ─── */
+        .dropzone {
+            border: 2px dashed rgba(234,28,33,0.4) !important;
+            border-radius: 12px !important;
+            background: rgba(234,28,33,0.04) !important;
+            min-height: 150px;
+        }
+        .dropzone:hover { border-color: var(--admin-red) !important; }
+        .dropzone .dz-message { color: var(--admin-text-muted) !important; font-size: 1rem; }
+        .dropzone .dz-message i { display: block; font-size: 2.5rem; color: var(--admin-red) !important; margin-bottom: 10px; }
+
+        /* ─── FOOTER ─── */
+        .admin-footer {
+            padding: 1rem 1.8rem;
+            border-top: 1px solid var(--admin-border);
+            background: var(--admin-surface);
+            font-size: 0.78rem;
+            color: var(--admin-text-muted);
+            text-align: center;
+        }
+
+        /* ─── SCROLLBAR ─── */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--admin-bg); }
+        ::-webkit-scrollbar-thumb { background: rgba(234,28,33,0.4); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--admin-red); }
+
+        /* ─── ALERTS ─── */
+        .alert-info {
+            background: rgba(79,179,255,0.08);
+            border: 1px solid rgba(79,179,255,0.2);
+            color: #4fb3ff;
+            border-radius: 10px;
+        }
+
+        /* ─── LINK OVERRIDE ─── */
+        a { color: var(--admin-red); }
+        a:hover { color: var(--admin-red-hover); }
+    </style>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <a class="sidebar-brand" href="/Admin">
+                <div class="brand-icon"><i class="fas fa-fire"></i></div>
+                <div class="brand-text">
+                    <strong>Eray Admin</strong>
+                    <small>Yönetim Paneli</small>
+                </div>
+            </a>
+
+            <div class="sidebar-section-label">Ana Menü</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")" href="/Admin/Index">
+                        <i class="fas fa-gauge-high"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "Gallery" ? "active" : "")" href="/Admin/Gallery">
+                        <i class="fas fa-images"></i> Medya Galerisi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "Upload" ? "active" : "")" href="/Admin/Upload">
+                        <i class="fas fa-cloud-arrow-up"></i> Resim Yükle
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-section-label">Müşteri Yönetimi</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "Messages" || ViewContext.RouteData.Values["Action"]?.ToString() == "MessageDetail" ? "active" : "")" href="/Admin/Messages">
+                        <i class="fas fa-inbox"></i> Gelen Mesajlar
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <a href="/" target="_blank">
+                    <i class="fas fa-arrow-up-right-from-square"></i> Siteye Git
+                </a>
+            </div>
+        </nav>
+        <!-- End Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper">
+            <!-- Topbar -->
+            <nav class="topbar">
+                <div class="topbar-title">@ViewData["Title"]</div>
+                <div class="topbar-right">
+                    <div class="topbar-user">
+                        <div class="user-avatar"><i class="fas fa-user fa-xs"></i></div>
+                        <span>Admin</span>
+                    </div>
+                    <a href="@Url.Action("Logout", "Admin")" class="btn-logout">
+                        <i class="fas fa-right-from-bracket fa-sm"></i> Çıkış
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                @RenderBody()
+            </div>
+
+            <!-- Footer -->
+            <footer class="admin-footer">
+                &copy; @DateTime.Now.Year — Eray Barbekü Şömine Yönetim Paneli
+            </footer>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,112 @@
+@{
+    ViewData["Title"] = "Toplu Resim Yükle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 col-lg-8 offset-lg-2">
+        <h2 class="mb-4 text-center">Toplu Resim Yükle</h2>
+        <div class="card shadow border-0 rounded-4">
+            <div class="card-body p-5">
+                
+                <div class="form-group mb-4">
+                    <label class="form-label fw-bold">Yüklenecek Kategori</label>
+                    <select id="categorySelect" class="form-select form-select-lg">
+                        <option value="">-- Lütfen Bir Kategori Seçin --</option>
+                        @foreach (var cat in ViewBag.Categories)
+                        {
+                            <option value="@cat">@cat</option>
+                        }
+                    </select>
+                </div>
+
+                <form action="/Admin/UploadImage" class="dropzone" id="myDropzone" style="border: 2px dashed #0d6efd; border-radius: 10px; background: #f8f9fa;">
+                    @Html.AntiForgeryToken()
+                    <div class="dz-message" data-dz-message>
+                        <i class="fas fa-cloud-upload-alt text-primary mb-3" style="font-size: 3rem;"></i><br>
+                        <h5>Resimleri Buraya Sürükleyin veya Seçmek İçin Tıklayın</h5>
+                        <p class="text-muted">Aynı anda birden fazla resim seçebilir veya sürükleyebilirsiniz.</p>
+                    </div>
+                </form>
+
+                <div class="mt-4 text-center">
+                    <button class="btn btn-primary btn-lg px-5 shadow rounded-pill" id="btnUploadImages">
+                        <i class="fas fa-upload me-2"></i> Seçili Resimleri Yükle
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" integrity="sha512-Wv/1jO5kRzQ+P56Xl4qL/r+jOHB7X6Rk8O1GOKF2Lq53z6q8tXN5/2Q9m9uGZ5oA32hL5rYc7mX7kS5Zq5PZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js" integrity="sha512-RzU8T63f3wWqf31V6bL5pE+P4v7b56A8z/e2lH7Yy9L+/1H/T8f5S4i9V2+F9Yk4tE5+l7D83X5rM9Yh+m78fQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Disable auto discover
+        Dropzone.autoDiscover = false;
+
+        $(document).ready(function () {
+            var myDropzone = new Dropzone("#myDropzone", {
+                url: "/Admin/UploadImage",
+                autoProcessQueue: false, // Prevent sending until button is pressed
+                uploadMultiple: false,   // Send files one by one (to keep AdminController simple)
+                parallelUploads: 10,
+                maxFiles: 50,
+                acceptedFiles: "image/*",
+                addRemoveLinks: true,
+                dictRemoveFile: "Resmi Kaldır",
+                dictCancelUpload: "İptal",
+                init: function () {
+                    var dz = this;
+
+                    $("#btnUploadImages").click(function (e) {
+                        e.preventDefault();
+                        var cat = $("#categorySelect").val();
+                        if (!cat) {
+                            Swal.fire('Hata', 'Lütfen resimleri yüklemeden önce bir kategori seçiniz.', 'warning');
+                            return;
+                        }
+                        if (dz.getQueuedFiles().length === 0) {
+                            Swal.fire('Bilgi', 'Lütfen yüklenecek resimleri seçiniz.', 'info');
+                            return;
+                        }
+                        
+                        // Disable button and show loading logic
+                        $("#btnUploadImages").prop("disabled", true).html('<i class="fas fa-spinner fa-spin me-2"></i> Yükleniyor...');
+                        dz.processQueue();
+                    });
+
+                    this.on('sending', function (file, xhr, formData) {
+                        // Append category and anti forgery token
+                        formData.append('category', $("#categorySelect").val());
+                        formData.append('__RequestVerificationToken', document.querySelector('input[name="__RequestVerificationToken"]').value);
+                    });
+
+                    this.on('success', function(file, response) {
+                        if(response.success) {
+                            // File uploaded successfully
+                        } else {
+                            this.removeFile(file);
+                            Swal.fire('Hata', response.message, 'error');
+                        }
+                    });
+
+                    this.on('error', function(file, errorMessage) {
+                        Swal.fire('Sunucu Hatası', errorMessage, 'error');
+                    });
+
+                    this.on('queuecomplete', function() {
+                        Swal.fire('Tamamlandı', 'Tüm resimler başarıyla yüklendi!', 'success').then(() => {
+                            location.href = '/Admin/Gallery'; // Redirect cleanly to Media Gallery
+                        });
+                        $("#btnUploadImages").prop("disabled", false).html('<i class="fas fa-upload me-2"></i> Seçili Resimleri Yükle');
+                        dz.removeAllFiles();
+                    });
+                }
+            });
+        });
+    </script>
+}

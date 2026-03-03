@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /Admin/
+
+Sitemap: https://www.eraybarbekusomine.com/sitemap.xml

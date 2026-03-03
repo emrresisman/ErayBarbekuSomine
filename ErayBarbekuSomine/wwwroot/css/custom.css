@@ -1,0 +1,349 @@
+/* 
+========================================================================
+ TIER 1 FRONTEND ESTHETIC UPGRADES
+======================================================================== 
+*/
+
+/* 1. Custom Scrollbar (Dark/Gaming/Premium Style) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #12161A;
+    /* Dark theme background */
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #EA1C21 0%, #a40003 100%);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ff3c41 0%, #c4060b 100%);
+}
+
+
+/* 2. Glassmorphism Header (Buzlu Cam Efekti) */
+#header .header-body {
+    background: rgba(18, 22, 26, 0.75) !important;
+    /* Semi-transparent black */
+    backdrop-filter: blur(12px);
+    /* Apple-style glass blur */
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    transition: all 0.4s ease;
+}
+
+
+/* 3. Product Hover Effects (Zoom & Lift) */
+.product-item {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    /* Smooth snap */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(234, 28, 33, 0.15), 0 15px 20px rgba(0, 0, 0, 0.4);
+}
+
+.product-item img {
+    transition: transform 0.6s ease;
+}
+
+.product-item:hover img {
+    transform: scale(1.06);
+    /* Gentle zoom inside the card */
+}
+
+/* Image gallery wrappers */
+.img-thumbnail-no-borders {
+    overflow: hidden;
+    border-radius: 8px;
+    transition: all 0.4s ease;
+}
+
+.img-thumbnail-no-borders:hover {
+    box-shadow: 0 15px 35px rgba(234, 28, 33, 0.2);
+    transform: translateY(-5px);
+}
+
+.img-thumbnail-no-borders img {
+    transition: transform 0.5s ease;
+}
+
+.img-thumbnail-no-borders:hover img {
+    transform: scale(1.05);
+}
+
+
+/* 4. Pulse Effect on WhatsApp Button */
+.float {
+    /* Existing float styles are in _Layout, we add animation here */
+    animation: pulse-whatsapp 2s infinite;
+}
+
+@keyframes pulse-whatsapp {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(26, 188, 156, 0.7);
+        /* Teal/Whatsapp color */
+    }
+
+    70% {
+        transform: scale(1.05);
+        /* Slight pop */
+        box-shadow: 0 0 0 15px rgba(26, 188, 156, 0);
+        /* Ripples out and fades */
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(26, 188, 156, 0);
+    }
+}
+
+
+/* 5. Gradient Text applied to Primary Headings */
+h1.font-weight-bold,
+h2.font-weight-bold,
+h3.font-weight-bold {
+    /* Fire/Gold to Red Premium Gradient */
+    background: linear-gradient(90deg, #ff7e5f 0%, #feb47b 50%, #ea1c21 100%);
+    background-size: 200% auto;
+    color: transparent !important;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shimmer-text 5s linear infinite;
+    display: inline-block;
+}
+
+@keyframes shimmer-text {
+    to {
+        background-position: 200% center;
+    }
+}
+
+
+/* 6. Preloader Screen */
+#tier1-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #12161A;
+    /* Dark Theme bg */
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+}
+
+.fire-spinner {
+    font-size: 4rem;
+    color: #EA1C21;
+    animation: spinAndPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes spinAndPulse {
+    0% {
+        transform: scale(0.8) translateY(10px);
+        color: #ff7e5f;
+    }
+
+    100% {
+        transform: scale(1.2) translateY(-10px);
+        color: #ea1c21;
+    }
+}
+
+
+/* 7. Scroll Progress Bar */
+#scroll-progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    /* Thin, elegant line */
+    background: transparent;
+    z-index: 999999;
+    /* Highest priority */
+}
+
+#scroll-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #feb47b 0%, #ea1c21 100%);
+    box-shadow: 0 0 10px rgba(234, 28, 33, 0.8);
+    transition: width 0.1s ease-out;
+}
+
+/* 8. Premium Contact Section */
+.premium-contact-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.premium-contact-box:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(234, 28, 33, 0.4);
+    box-shadow: 0 15px 40px rgba(234, 28, 33, 0.15);
+}
+
+.premium-contact-box .icon-wrapper {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(234, 28, 33, 0.1), rgba(234, 28, 33, 0.02));
+    border: 1px solid rgba(234, 28, 33, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #EA1C21;
+    transition: all 0.4s ease;
+}
+
+.premium-contact-box:hover .icon-wrapper {
+    background: #EA1C21;
+    color: #FFF;
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 20px rgba(234, 28, 33, 0.4);
+}
+
+/* Glowing Pulse effect for phone icon wrapper */
+.glow-icon {
+    animation: contact-pulse 2s infinite;
+}
+
+@keyframes contact-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(234, 28, 33, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(234, 28, 33, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(234, 28, 33, 0);
+    }
+}
+
+/* 9. Premium Inner Product Gallery Cards */
+.premium-gallery-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 10px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.premium-gallery-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(234, 28, 33, 0.15);
+    border-color: rgba(234, 28, 33, 0.3);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.gallery-overlay-container {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.gallery-overlay-container img {
+    transition: transform 0.6s ease;
+}
+
+.premium-gallery-card:hover .gallery-overlay-container img {
+    transform: scale(1.08);
+}
+
+.gallery-hover-eff {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(18, 22, 26, 0.9), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 20px;
+    pointer-events: none;
+}
+
+.premium-gallery-card:hover .gallery-hover-eff {
+    opacity: 1;
+}
+
+.gallery-hover-eff i {
+    color: #EA1C21;
+    font-size: 24px;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+}
+
+.premium-gallery-card:hover .gallery-hover-eff i {
+    transform: translateY(0);
+}
+
+/* 10. Subtle Homepage Glassmorphism */
+.subtle-glass-panel {
+    background: rgba(18, 22, 26, 0.4);
+    /* Very thin transparency */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.subtle-glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(234, 28, 33, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.glass-product-wrap .thumb-info-title {
+    background: rgba(18, 22, 26, 0.6) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+}
+
+.glass-product-wrap:hover .thumb-info-title {
+    background: rgba(10, 12, 16, 0.5) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
